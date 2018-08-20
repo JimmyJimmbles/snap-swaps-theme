@@ -1,0 +1,101 @@
+.block-with-bullets{
+  position: relative;
+  background: linear-gradient(to right, #00adee 38%, #ffffff 38%);
+  z-index: 0;
+}
+.block-heading{
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
+
+  .block-heading--title{
+    font-size: 3em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+  }
+}
+.block-bullets{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0;
+  height: 100%;
+
+  .block-bullets--item{
+    position: relative;
+    counter-increment: section;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: space-evenly;
+    width: 27em;
+    padding: 0 1.25em;
+    margin: 1em 0;
+
+    .block-bullets__heading{
+      color: #2d2d2d;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 1.5em;
+    }
+    .block-bullets__text{
+      text-align: start;
+    }
+    &:nth-child(odd){
+      .block-bullets__text{
+        text-align: end;
+      }
+    }
+    &:nth-child(odd){
+      -ms-flex-flow: row-reverse;
+      flex-flow: row-reverse wrap;
+    }
+    &:nth-child(odd)::before{
+      left: 100%;
+    }
+    &:nth-child(4n+1):before{
+      background: #ffdd15;
+    }
+    &:nth-child(4n+2):before{
+      background: #00a551;
+    }
+    &:nth-child(4n+3):before{
+      background: #ec1c24;
+    }
+    &:nth-child(4n+4):before{
+      background: #00adee;
+    }
+    &:before{
+      position: absolute;
+      bottom: 6%;
+      right: 100%;
+      content: "#" counter(section);
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      float: left;
+      width: 2em;
+      height: 2em;
+      background: #ffdd15;
+      border-radius: 100px;
+      color: #fff;
+      font-size: 4em;
+      font-weight: 800;
+      transform: translate(0, -50%);
+    }
+  }
+}

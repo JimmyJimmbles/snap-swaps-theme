@@ -1,0 +1,36 @@
+.section-heading{
+  font-size: 2em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+}
+.image-with-text {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5em 0 2em;
+  @media (min-width: 768px) {
+    padding: 5em 0 0em;
+  }
+}
+
+.image-with-text__image {
+
+  .responsive-image__wrapper{
+    width: 100%;
+    border: 15px solid #eee;
+    transform: translate(0, 0);
+    z-index: 1;
+
+    @media (min-width: 768px) {
+      transform: translate(0, 15%);
+    }
+  }
+}
+
+.image-with-text__text {
+
+}
+.responsive-image__wrapper img{
+  display: block !important;
+  max-width: 100% !important;
+  height: auto;
+}

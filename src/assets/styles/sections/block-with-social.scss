@@ -1,0 +1,28 @@
+.block-with-social{
+  position: relative;
+  background: linear-gradient(to right, #ffffff 60%, #ffdd15 60%);
+  z-index: 0;
+
+  .social-list{
+    padding: 0 1.5em;
+    .social-list--link{
+      color: #ffdd15;
+    }
+  }
+}
+.block--image{
+  display: block;
+  position: relative;
+  .responsive-image__wrapper{
+    position: absolute;
+    display: block;
+    max-width: 88% !important;
+    right: 34%;
+    top: 0;
+    height: auto;
+    transform: translate(0, -17%);
+    img{
+      max-height: unset !important;
+    }
+  }
+}

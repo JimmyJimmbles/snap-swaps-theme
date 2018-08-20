@@ -1,0 +1,48 @@
+html {
+  background-color: $color-body;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+a{
+  text-decoration: none;
+  display: inline-block;
+}
+.container-fluid--md{
+
+  @media (max-width: 767px) {
+    max-width: 100% !important;
+  }
+}
+/*Default List display*/
+.inline-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+
+  li{
+    display: inline-block;
+    margin: 0 0.3em;
+  }
+
+}
+.bg-blue{
+  background: #00adee;
+}
+.bg-white{
+  background: #fff;
+}
+.bg-yellow{
+  background: #ffdd15;
+}

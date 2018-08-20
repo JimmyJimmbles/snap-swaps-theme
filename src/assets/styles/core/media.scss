@@ -1,0 +1,81 @@
+figure {
+  margin: 0;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}
+
+iframe{
+  width: 100%;
+  display: block;
+  max-width: 100%;
+}
+.social-list{
+	display: inline-flex;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+  .social-list--item{
+    display: block;
+    margin: 0 0.5em;
+
+    .social-list--link{
+      position: relative;
+      font-size: 1.4em;
+      background: #333;
+      width: 1.75em;
+      height: 1.75em;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .fa{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+.social-link--colorful {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.75em;
+	width: 1.75em;
+	margin: 0 0.25em;
+	border-radius: 100px;
+	color: #141415 !important;
+
+	&.twitter{
+		background: $playful-blue;
+		&:hover{ background: darken($playful-blue, 10%); }
+	}
+	&.snapchat{
+		background: $playful-yellow;
+		&:hover{ background: darken($playful-yellow, 10%); }
+	}
+	&.google-plus{
+		background: $playful-green;
+		&:hover{ background: darken($playful-green, 10%); }
+	}
+	&.facebook{
+		background: $playful-red;
+		&:hover{ background: darken($playful-red, 10%); }
+	}
+	// If browser dosen't support flex blox
+	.fa{
+		position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	}
+
+}

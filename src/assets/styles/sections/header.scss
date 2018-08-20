@@ -1,0 +1,135 @@
+.header{
+	position: relative;
+	display: block;
+
+	&.hero-header{
+  	background: #141415;
+		color: #fff;
+		padding: 1em;
+
+		.hero-image{
+			padding: 0 2em;
+		}
+
+	}
+	a {
+  	color: #fff;
+		transition: all 0.3s ease;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+}
+
+.hero-info--details {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+
+	.hero-info--social {
+    position: relative;
+    display: block;
+	}
+	.hero-info--contact {
+    position: relative;
+    display: block;
+	}
+}
+
+
+.hero-account{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+
+	.search-input {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #eee;
+    border-radius: 30px;
+    padding: 0 1em;
+    overflow: hidden;
+
+		[type="search"] {
+		  background: transparent;
+		  color: #fff;
+		  height: 37px;
+		  border: none;
+
+			&:focus,
+			&:active {
+				outline: unset;
+		    border: unset;
+			}
+		}
+
+		.button{
+			position: absolute;
+	    background: transparent;
+	    color: #fff;
+	    top: 0;
+	    bottom: 0;
+	    right: 0.45em;
+		}
+
+	}
+
+}
+.break {
+  margin: 0 0.35em;
+}
+
+/*Navigation*/
+.navbar {
+	padding: 0;
+
+	.navbar-list {
+		display: flex;
+		width: 100%;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		.nav-item{
+			display: inline-block;
+	    flex: 0 0 25%;
+	    text-align: center;
+			&:first-child{
+				.nav-link{
+					background: $playful-red;
+					&:hover{ background: darken($playful-red, 10%); }
+				}
+			}
+			&:nth-child(2){
+				.nav-link{
+					background: $playful-blue;
+					&:hover{ background: darken($playful-blue, 10%); }
+				}
+			}
+			&:nth-child(3){
+				.nav-link{
+					background: $playful-yellow;
+					&:hover{ background: darken($playful-yellow, 10%); }
+				}
+			}
+			&:last-child{
+				.nav-link{
+					background: $playful-green;
+					&:hover{ background: darken($playful-green, 10%); }
+				}
+			}
+
+			.nav-link{
+				padding: 0.75em 0;
+		    color: #fff;
+		    font-size: 23px;
+		    text-transform: uppercase;
+				transition: all 0.3s ease;
+			}
+
+		}
+
+	}
+
+}

@@ -1,0 +1,244 @@
+<section data-section-id="{{ section.id }}" data-section-type="header">
+	{%- if section.settings.announcement_bar_enabled -%}
+	<div class="announcement-bar">
+		{%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+			{%- if section.settings.announcement_bar_link != blank -%}
+				<a class="announcement-bar--link" href="{{ section.settings.announcement_bar_link }}">
+					{{ section.settings.announcement_bar_text | escape }}
+				</a>
+			{%- else -%}
+				<span class="announcement-bar--text">{{ section.settings.announcement_bar_text | escape }}</span>
+			{%- endif -%}
+		{%- endif -%}
+	</div>
+	{%- endif -%}
+  <header class="header hero-header" role="banner">
+    <div class="container-fluid">
+      <div class="row justify-content-between align-items-center">
+        <div class="hero-image col-12 col-md">
+          <a class="hero-link home-link" href="/">
+            {% if section.settings.logo != blank %}
+              {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+              <img class="img-responsive hero-img" src="{{ section.settings.logo | img_url: image_size}}"
+                  srcset="{{ section.settings.logo | img_url: image_size }} 1x,
+                    {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                  alt="{{ section.settings.logo.alt | default: shop.name }}">
+            {% else %}
+             {{ shop.name }}
+            {% endif %}
+          </a>
+        </div>
+        <div class="hero-info col-12 col-md-4">
+          <div class="hero-info--details">
+            <div class="hero-info--contact">
+              <a class="simple-link" href="tel:#">806 555-5555</a>
+              <span class="break"> | </span>
+              <a class="simple-link" href="#">2200 4th Ave. #248 Canyon, TX 79105</a>
+            </div>
+            <div class="hero-info--social">
+              {%- assign social_accounts = 'Twitter, Snapchat, Google-Plus, Facebook,' | split: ', ' -%}
+              <ul class="social-list">
+                {% for social in social_accounts%}
+                  {%- assign social_handle = social | handleize -%}
+                  {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                  {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+                  {% if settings[social_link] != blank %}
+                    <li class="social-list--item">
+                      <a class="social-link--colorful {{ social_handle }}" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                        <i class="fa fa-{{ social_handle }}" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div class="hero-account">
+            <form class="search-form" action="/search" method="get" role="search">
+              <div class="search-input">
+                <input type="search"
+                  name="q"
+                  id="Search"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}">
+                <button type="submit" class="button">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </form>
+            <div class="account-icons">
+              {% if shop.customer_accounts_enabled %}
+                <ul class="inline-list">
+									<li>
+										<a class="shopping-cart--icon" href="/cart">
+			                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+			                <span class=" badge badge-pill badge-primary cart-badge">
+			                  {{ cart.item_count }}
+			                </span>
+			              </a>
+									</li>
+                  {% if customer %}
+                    <li>
+                      {% if customer.first_name != blank %}
+                        {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                        {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                      {% else %}
+                        <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                      {% endif %}
+                    </li>
+                    <li>
+                      {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                    </li>
+                  {% else %}
+                    <li>
+                      {{ 'layout.customer.log_in' | t | customer_login_link }}
+                    </li>
+                    <li>
+                      {{ 'layout.customer.create_account' | t | customer_register_link }}
+                    </li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+	<nav class="navbar" role="navigation">
+		<ul class="navbar-list">
+			{% for link in linklists[section.settings.menu].links %}
+				{% if link.links != blank %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="{{ link.url }}" aria-haspopup="true" aria-expanded="false">
+							{{ link.title }}
+							{% include 'icon-arrow-down' %}
+						</a>
+						<ul class="navbar-submenu dropdown-menu">
+							{% for childlink in link.links %}
+								<li>
+									<a class="dropdown-item" href="{{ childlink.url }}">
+										{{ childlink.title }}
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ link.url }}">
+							{{ link.title }}
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+</section>
+
+{% if section.settings.logo != blank %}
+  <style>
+    .logo-image {
+      display: block;
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_home_page_only",
+        "label": "Show on home page only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "header",
+        "content": "Header Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu"
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_google-plus_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}
