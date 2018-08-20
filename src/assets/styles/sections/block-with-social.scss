@@ -9,8 +9,11 @@
   .social-list{
     padding: 0 1.5em;
     margin-bottom: 2em;
-    .social-list--link{
-      color: #ffdd15;
+    .social-list--item{
+      margin: 0 .5em;
+      .social-list--link{
+        color: #ffdd15;
+      }
     }
   }
 }
