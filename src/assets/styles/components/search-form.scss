@@ -1,0 +1,33 @@
+.search-input {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #eee;
+  border-radius: 30px;
+  padding: 0 1em;
+  overflow: hidden;
+  max-width: 100%;
+
+  [type="search"] {
+    background: transparent;
+    color: #fff;
+    height: 37px;
+    border: none;
+    max-width: 100%;
+
+    &:focus,
+    &:active {
+      outline: unset;
+      border: unset;
+    }
+  }
+
+  .button{
+    position: absolute;
+    background: transparent;
+    color: #fff;
+    top: 0;
+    bottom: 0;
+    right: 0.45em;
+  }
+
+}
