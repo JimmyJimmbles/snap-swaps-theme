@@ -49,8 +49,10 @@
       font-weight: 800;
       text-transform: uppercase;
       font-size: 1.5em;
+      z-index: 1;
     }
     .block-bullets__text{
+      position: relative;
       text-align: start;
     }
     &:nth-child(odd){
@@ -63,7 +65,11 @@
       flex-flow: row-reverse wrap;
     }
     &:nth-child(odd)::before{
-      left: 100%;
+      bottom: 6%;
+      left: 85%;
+      @media (min-width: 1024px) {
+        left: 100%;
+      }
     }
     &:nth-child(4n+1):before{
       background: #ffdd15;
@@ -80,7 +86,7 @@
     &:before{
       position: absolute;
       bottom: 6%;
-      right: 100%;
+      right: 85%;
       content: "#" counter(section);
       display: -ms-flexbox;
       display: flex;
@@ -97,6 +103,10 @@
       font-size: 4em;
       font-weight: 800;
       transform: translate(0, -50%);
+      z-index: 0;
+      @media (min-width: 1024px) {
+        right: 100%;
+      }
     }
   }
 }

@@ -164,7 +164,7 @@
 {% endstylesheet %}
 
 {% javascript %}
-{
+<!-- {
   "@context": "http://schema.org",
   "@type": "Organization",
   "name": "{{ shop.name }}",
@@ -175,5 +175,5 @@
     "{{ settings.social_google-plus_link }}"
   ],
   "url": "{{ shop.url }}{{ page.url }}"
-}
+} -->
 {% endjavascript %}
