@@ -1,0 +1,179 @@
+<section class="block-with-social">
+  <div class="container container-fluid--md">
+    <div class="row">
+      <div class="col-12 col-md-8 bg-white">
+        {% if section.settings.block_text != blank %}
+          <div class="block--text">
+            {{ section.settings.block_text }}
+          </div>
+        {% else if section.settings.block_image != blank %}
+          <div class="block--image">
+            {% include 'responsive-image' with
+              image: section.settings.block_image,
+              max_width: 545,
+              max_height: 545
+            %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-4 bg-yellow">
+        <div class="block-heading">
+          <h1 class="block-heading--title">
+            {{ section.settings.title | escape }}
+          </h1>
+        </div>
+        <div class="social-block--content">
+          {%- assign social_accounts = 'Facebook, Twitter, Snapchat, google-plus,' | split: ', ' -%}
+          <ul class="social-list">
+            {% for social in social_accounts %}
+              {%- assign social_handle = social | handleize -%}
+              {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+              {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+              {% if settings[social_link] != blank %}
+                <li class="social-list--item">
+                  <a class="social-list--link" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" target="_blank">
+                    <i class="fa fa-{{ social_handle }}" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {% endif %}
+
+            {% endfor %}
+          </ul>
+          <div class="social-info">
+            {% if section.settings.address_url != blank and  section.settings.address_text != blank %}
+            <p>
+              <a class="simple-link" href="{{ section.settings.address_url }}">
+                {{ section.settings.address_text | escape }}
+              </a>
+            </p>
+            {% endif %}
+            {% if section.settings.phone_number != blank %}
+            <p>
+              <strong>Phone:</strong>
+              <a class="simple-link" href="tel:{{ section.settings.phone_number }}" target="_blank" title="Snap Swaps Contact">
+                {{ section.settings.phone_number | escape }}
+              </a>
+            </p>
+            {% endif %}
+            {% if section.settings.contact_person_name_1 != blank and section.settings.contact_person_email_1 != blank %}
+            <p>
+              <strong>{{ section.settings.contact_person_name_1 }}</strong>
+              <a class="simple-link" href="mailto:{{ section.settings.contact_person_email_1 }}" target="_blank" title="Snap Swaps Contact">
+                {{ section.settings.contact_person_email_1 | escape }}
+              </a>
+            </p>
+            {% endif %}
+            {% if section.settings.contact_person_name_2 != blank and section.settings.contact_person_email_2 != blank %}
+            <p>
+              <strong>{{ section.settings.contact_person_name_2 }}</strong>
+              <a class="simple-link" href="mailto:{{ section.settings.contact_person_email_2 }}" target="_blank" title="Snap Swaps Contact">
+                {{ section.settings.contact_person_email_2 | escape }}
+              </a>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Block with Social",
+    "settings": [
+      {
+      	"type": "header",
+      	"content": "Content Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title",
+        "default": "Example Section Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "block_image",
+        "label": "Section Image",
+        "info": "Optional"
+      },
+      {
+        "type": "richtext",
+        "id": "block_text",
+        "label": "Section Content",
+        "info": "Optional"
+      },
+      {
+      	"type": "header",
+      	"content": "Contact Information"
+      },
+      {
+        "type": "text",
+        "id": "address_text",
+        "label": "Enter Address"
+      },
+      {
+        "type": "url",
+        "id": "address_url",
+        "label": "Link to Address"
+      },
+      {
+        "type": "number",
+        "id": "phone_number",
+        "label": "Enter Phone Number",
+        "info": "Enter Only Digits"
+      },
+      {
+        "type": "text",
+        "id": "contact_person_name_1",
+        "label": "First Person of Contact Name",
+        "default": "John Doe"
+      },
+      {
+        "type": "text",
+        "id": "contact_person_email_1",
+        "label": "First Person of Contact Email",
+        "default": "example@email.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_person_name_2",
+        "label": "Second Person of Contact Name",
+        "default": "Jane Dee",
+        "info": "Optional"
+      },
+      {
+        "type": "text",
+        "id": "contact_person_email_2",
+        "label": "Second Person of Contact Email",
+        "default": "example@email.com",
+        "info": "Optional"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Block with Social",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_google-plus_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+{% endjavascript %}
