@@ -1,10 +1,39 @@
+<section data-section-id="{{ section.id }}" class="section product-slider">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="block-heading">
+          <h1 class="block-heading--title">
+            {{ section.settings.header | escape }}
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="slider product-slider" data-slide="" role="slider">
+        <div class="slider-inner">
+          <div class="slide">
+            {% for image in product.images %}
+              <img src="{{ image.src | img_url }}" alt="{{ image.alt | escape }}">
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% schema %}
   {
     "name": "Product Slider",
     "settings": [
-
-	],
-	"presets": [
+      {
+        "type": "text",
+        "id": "header",
+        "label": "Section Heading",
+        "default": "Example Section Heading"
+      }
+    ],
+    "presets": [
       {
         "name": "Product Slider",
         "category": "Product"
