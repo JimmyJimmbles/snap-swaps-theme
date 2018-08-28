@@ -12,11 +12,27 @@
     <div class="row">
       <div class="slider product-slider" data-slide="" role="slider">
         <div class="slider-inner">
-          <div class="slide">
-            {% for image in product.images %}
-              <img src="{{ image.src | img_url }}" alt="{{ image.alt | escape }}">
-            {% endfor %}
+          {%- comment -%}
+            Loop through each product and display them accordingly.
+          {%- endcomment -%}
+          {%- assign i = 0 -%}
+          {% for product in collections.specials.products %}
+          {% capture product_image %} {{ product | img_url }} {% endcapture %}
+          {%- assign i = i | plus: 1 -%}
+          {% if i == 1 %}
+            <div class="slide active">
+          {% else %}
+            <div class="slide">
+          {% endif %}
+            <div class="product">
+              <a href="{{ product.url }}">
+                <img src="{{ product_image }}" alt="">
+                {{ product.title }}
+              </a>
+              {{ product.description }}
+            </div>
           </div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -46,5 +62,5 @@
 {% endstylesheet %}
 
 {% javascript %}
-console.log("Hello");
+
 {% endjavascript %}
