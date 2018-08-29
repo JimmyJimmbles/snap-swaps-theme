@@ -40,3 +40,39 @@
     text-transform: uppercase;
   }
 }
+.carousel-item.active {
+  display: flex !important;
+}
+.pill-container{
+  position: relative;
+  width: 100%;
+  margin: 2em 0 3em;
+}
+.nav-pills {
+  align-items: center;
+  justify-content: center;
+  .nav-link {
+    color: #e8e8e8;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    font-size: 1.2em;
+    padding: 0.2em 2em;
+    margin: 0 0.5em;
+    border-radius: 100px;
+    transition: 0.2s ease;
+    &:hover {
+      background: rgba(146, 146, 146, 0.5);
+    }
+    &.active{
+      color: #fff;
+      background-color: #00adee;
+      &:hover {
+        background-color: #26c1fb;
+      }
+    }
+  }
+}
+.nav-pills .show>.nav-link{
+  color: #fff;
+  background-color: #00adee;
+}

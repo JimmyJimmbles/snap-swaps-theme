@@ -51,9 +51,77 @@
         <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
           <div id="popularCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
+              <div class="carousel-item active">
+                {% for product in collections.specials.products %}
+                  {%- assign current_variant = product.selected_or_first_available_variant -%}
+                  {% if product == empty %}
+                    {%- assign section_onboarding = true -%}
+                  {% endif %}
+                  {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+                  {%- assign mod = forloop.index | modulo: 3 -%}
+                  {% if mod == 1 %}
+                    {%- unless forloop.first -%}
+                    <div class="carousel-item">
+                    {%- endunless -%}
+                  {% endif %}
+                    <div class="col-12 col-sm-4">
+                    <div class="product">
+                      <a class="product-image--link" href="{{ product.url }}" role="link">
+                        <img
+                          class="product-image--img"
+                          src="{{ product_image }}"
+                          alt="{{ product.title }}">
+                      </a>
+                      <div class="product-details">
+                        <h3 class="product-title"> {{ product.title }} </h3>
+                        <span class="product-title--sub"> ({{ current_variant.sku }}) </span>
+                        <p class="product-description">
+                          {{ product.description }}
+                        </p>
+                        <form
+                          class="add-to-cart--form"
+                          data-productid="{{product.id}}"
+                          action="/cart/add"
+                          method="post">
+                            <div class="input-wrapper">
+                              <input type="hidden" name="quantity" id="quantity" value="1">
+                              <input
+                                type="hidden"
+                                name="id"
+                                data-productid="{{product.id}}"
+                                class="product-select"
+                                value="{{ product.variants[0].id }}"
+                                data-variant-title="{{ product.variants[0].title }}">
+                            </div>
+                            <button
+                              class="add-to-cart--btn"
+                              type="submit"
+                              name="add"
+                              data-add-to-cart
+                              {% unless product.available %}disabled="disabled"{% endunless %}
+                              {% if section_onboarding %}disabled="disabled"{% endif %}>
+                                <span data-add-to-cart-text>
+                                  {% if product.available %}
+                                    {{ 'products.product.add_to_cart' | t }}
+                                  {% else %}
+                                    {{ 'products.product.sold_out' | t }}
+                                  {% endif %}
+                                </span>
+                            </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  {% if mod == 0 %}
+                    {%- unless forloop.last -%}
+                    </div>
+                    {%- endunless -%}
+                  {% endif %}
+                {% endfor %}
+              </div>
               {%- comment -%}
                 Loop through each product and display them accordingly.
-              {%- endcomment -%}
+
               {%- assign i = 0 -%}
               {% for product in collections.specials.products %}
 
@@ -65,7 +133,7 @@
 
               {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
               {%- assign i = i | plus: 1 -%}
-              <div class="carousel-item {% if i == 1 %} active {% endif %}">
+              <!-- <div class="carousel-item {% if i == 1 %} active {% endif %}">
                 <div class="col-12 col-sm-4">
                   <div class="product">
                     <a class="product-image--link" href="{{ product.url }}" role="link">
@@ -114,8 +182,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               {% endfor %}
+              {%- endcomment -%}
             </div>
           </div>
         </div>
