@@ -4,3 +4,39 @@
   z-index: 0;
   padding: 1em;
 }
+.product {
+  position: relative;
+  background: #ffffff;
+  display: block;
+  margin-bottom: 1em;
+}
+.product-image--link{
+  position: relative;
+  display: block;
+}
+.product-details {
+  padding: 0 2em 2em;
+  .product-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.5em;
+  }
+  .product-title--sub {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+.add-to-cart--form {
+
+  .add-to-cart--btn{
+    background: #ec1c24;
+    display: block;
+    border: none;
+    text-align: center;
+    margin: 2em auto 0;
+    color: #fff;
+    padding: 1em 4em;
+    text-transform: uppercase;
+  }
+}
