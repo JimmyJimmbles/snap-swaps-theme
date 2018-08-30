@@ -38,10 +38,8 @@
     color: #fff;
     padding: 1em 4em;
     text-transform: uppercase;
+    transition: 0.2s ease;
   }
-}
-.carousel-item.active {
-  display: flex !important;
 }
 .pill-container{
   position: relative;
@@ -75,4 +73,32 @@
 .nav-pills .show>.nav-link{
   color: #fff;
   background-color: #00adee;
+}
+.carousel-item{
+
+  .product-col{
+    &:nth-child(3n+1){
+      .add-to-cart--btn{
+        background: $playful-red;
+        &:hover{ background: darken($playful-red, 10%); }
+      }
+    }
+    &:nth-child(3n+2){
+      .add-to-cart--btn{
+        background: $playful-yellow;
+        &:hover{ background: darken($playful-yellow, 10%); }
+      }
+    }
+    &:nth-child(3n+3){
+      .add-to-cart--btn{
+        background: $playful-blue;
+        &:hover{ background: darken($playful-blue, 10%); }
+      }
+    }
+  }
+}
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+    display: flex;
 }
