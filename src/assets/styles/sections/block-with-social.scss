@@ -28,9 +28,19 @@
     top: 0;
     height: auto;
     transform: translate(0, -17%);
+    z-index: 1;
     img{
       max-height: unset !important;
     }
+  }
+  .message-img{
+    position: relative;
+    width: 14em;
+    height: 9em;
+    right: unset;
+    top: 20em;
+    left: 0%;
+    z-index: 0;
   }
 }
 .social-block--content{

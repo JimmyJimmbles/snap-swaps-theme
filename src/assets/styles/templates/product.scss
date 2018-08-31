@@ -5,3 +5,29 @@
     border-color: $color-border;
   }
 }
+.single-product{
+
+  .product--title {
+    color: #464646;
+    margin-bottom: 0.25em;
+  }
+  .product--vendor{
+    color: #6c757d;
+  }
+  .add-to-cart--btn{
+    margin: 2em 0 0;
+    background: $playful-blue;
+    &:hover{
+      background: darken($playful-blue, 10%);
+    }
+  }
+}
+.product-input--label{
+  color: #6c757d;
+  font-size: 1.2em;
+  margin-top: 0.5em;
+}
+.quantity{
+  max-width: 4em;
+  font-size: 1em;
+}
