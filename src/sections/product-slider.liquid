@@ -78,37 +78,6 @@
                         <p class="product-description">
                           {{ product.description }}
                         </p>
-                        <form
-                          class="add-to-cart--form"
-                          data-productid="{{product.id}}"
-                          action="/cart/add"
-                          method="post">
-                            <div class="input-wrapper">
-                              <input type="hidden" name="quantity" id="quantity" value="1">
-                              <input
-                                type="hidden"
-                                name="id"
-                                data-productid="{{product.id}}"
-                                class="product-select"
-                                value="{{ product.variants[0].id }}"
-                                data-variant-title="{{ product.variants[0].title }}">
-                            </div>
-                            <button
-                              class="add-to-cart--btn"
-                              type="submit"
-                              name="add"
-                              data-add-to-cart
-                              {% unless product.available %}disabled="disabled"{% endunless %}
-                              {% if section_onboarding %}disabled="disabled"{% endif %}>
-                                <span data-add-to-cart-text>
-                                  {% if product.available %}
-                                    {{ 'products.product.add_to_cart' | t }}
-                                  {% else %}
-                                    {{ 'products.product.sold_out' | t }}
-                                  {% endif %}
-                                </span>
-                            </button>
-                        </form>
                       </div>
                     </div>
                   </div>
