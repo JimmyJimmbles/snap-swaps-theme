@@ -31,7 +31,7 @@
 .add-to-cart--form {
 
   .add-to-cart--btn{
-    background: #ec1c24;
+    background: $playful-red;
     display: block;
     border: none;
     text-align: center;
@@ -65,16 +65,16 @@
     }
     &.active{
       color: #fff;
-      background-color: #00adee;
+      background-color: $playful-blue;
       &:hover {
-        background-color: #26c1fb;
+        background-color: lighten($playful-blue, 10%);
       }
     }
   }
 }
 .nav-pills .show>.nav-link{
   color: #fff;
-  background-color: #00adee;
+  background-color: $playful-blue;
 }
 .carousel-item{
 

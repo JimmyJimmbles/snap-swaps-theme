@@ -1,6 +1,6 @@
 .block-with-social{
   position: relative;
-  background: linear-gradient(to right, #ffffff 60%, #ffdd15 60%);
+  background: linear-gradient(to right, #ffffff 60%, $playful-yellow 60%);
   z-index: 0;
 
   .bg-yellow{
@@ -12,7 +12,7 @@
     .social-list--item{
       margin: 0 .5em;
       .social-list--link{
-        color: #ffdd15;
+        color: $playful-yellow;
       }
     }
   }

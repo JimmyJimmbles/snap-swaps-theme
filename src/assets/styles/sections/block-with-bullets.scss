@@ -1,6 +1,6 @@
 .block-with-bullets{
   position: relative;
-  background: linear-gradient(to right, #00adee 38%, #ffffff 38%);
+  background: linear-gradient(to right, $playful-blue 38%, #ffffff 38%);
   z-index: 0;
 }
 .block-heading{
@@ -73,16 +73,16 @@
       }
     }
     &:nth-child(4n+1):before{
-      background: #ffdd15;
+      background: $playful-yellow;
     }
     &:nth-child(4n+2):before{
-      background: #00a551;
+      background: $playful-green;
     }
     &:nth-child(4n+3):before{
-      background: #ec1c24;
+      background: $playful-red;
     }
     &:nth-child(4n+4):before{
-      background: #00adee;
+      background: $playful-blue;
     }
     &:before{
       position: absolute;
@@ -98,7 +98,7 @@
       float: left;
       width: 2em;
       height: 2em;
-      background: #ffdd15;
+      background: $playful-yellow;
       border-radius: 100px;
       color: #fff;
       font-size: 4em;

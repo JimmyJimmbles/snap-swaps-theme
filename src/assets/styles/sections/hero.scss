@@ -49,10 +49,10 @@
 
 .hero-title__span{
 
-  &:nth-child(4n+1){color: #ec1c24;}
-  &:nth-child(4n+2){color: #00adee;}
-  &:nth-child(4n+3){color: #ffdd15;}
-  &:nth-child(4n+4){color: #00a551;}
+  &:nth-child(4n+1){color: $playful-red;}
+  &:nth-child(4n+2){color: $playful-blue;}
+  &:nth-child(4n+3){color: $playful-yellow;}
+  &:nth-child(4n+4){color: $playful-green;}
 }
 
 .hero__btn{
