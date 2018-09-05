@@ -10,7 +10,8 @@
     }
   }
 }
-#header-collections-all{
+#header-collections-all,
+#header-collections{
   .header-title{
     &::after{
       content: '';
