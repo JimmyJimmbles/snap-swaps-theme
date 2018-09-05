@@ -1,29 +1,27 @@
 {% comment %}
   This page represents the /collections and /products pages.
 {% endcomment %}
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <header>
-        <h1 class="page-title">{{ page_title }}</h1>
-      </header>
-    </div>
+<header id="page-collections" class="page-header" role="heading">
+  <div class="header-title">
+    <h1 class="header-title--text">Shop It</h1>
   </div>
+</header>
+<div class="container page-container">
   <div class="row">
     {% for collection in collections %}
       {% unless collection.handle == 'frontpage' %}
-        {% capture product_image %} {{ collection | img_url: '500x500' }} {% endcapture %}
+        {% capture collection_image %} {{ collection | img_url: '500x500' }} {% endcapture %}
         <div class="col-12 col-sm-6 col-md-4">
           <a
             class="product-image--link"
-            href="{{ product.url }}"
+            href="{{ collection.url }}"
             title="{{ 'collections.general.link_title' | t: title: title }}"
             role="link">
               {% if collection.image != blank or collection.products.first != blank %}
                 <img
                   class="product-image--img"
-                  src="{{ product_image }}"
-                  alt="{{ product.title }}">
+                  src="{{ collection_image }}"
+                  alt="{{ collection.title }}">
               {% else %}
                 {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
                 {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
