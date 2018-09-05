@@ -2,5 +2,15 @@
 
 }
 .product-item{
-  
+  position: relative;
+  display: block;
+  transition: all 0.3s ease;
+  border: 1px solid #EBEDEF;
+  padding: 1em;
+  border-radius: 4px;
+  background: #fff;
+  &:hover{
+    transform: translateY(-3px);
+    box-shadow: 4px 5px 16px 0 rgba(0,0,0,.15);
+  }
 }
