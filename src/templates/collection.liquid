@@ -95,6 +95,9 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-12">
+        <h1 class="inner-title">What you could get!</h1>
+      </div>
       {% for product in collection.products %}
       {% if product.template_suffix == 'nobuy' %}
       {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
