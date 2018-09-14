@@ -6,7 +6,7 @@
     <h1 class="header-title--text">Shop It</h1>
   </div>
 </header>
-<div class="container page-container">
+<div class="container page-container collection-list">
   <div class="row">
     {% for collection in collections %}
       {% unless collection.handle == 'frontpage' %}
@@ -18,18 +18,32 @@
             title="{{ 'collections.general.link_title' | t: title: title }}"
             role="link">
               {% if collection.image != blank or collection.products.first != blank %}
+              <div class="collection-img--wrapper">
                 <img
-                  class="product-image--img"
+                  class="product-image--img img-responsive"
                   src="{{ collection_image }}"
                   alt="{{ collection.title }}">
+                  {{ 'collections.general.link_title' | t: title: title }}
+                <div class="collection-overlay">
+                  <h4 class="collection-overlay--title">
+                    {{ collection.title }}
+                  </h4>
+                </div>
+              </div>
               {% else %}
                 {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                <div class="collection-img--wrapper">
+                  {{ 'collection-' | append: current
+                    | placeholder_svg_tag:
+                    'placeholder-svg placeholder-svg--small' }}
+                  <div class="collection-overlay">
+                    <h4 class="collection-overlay--title">
+                      {{ collection.title }}
+                    </h4>
+                  </div>
+                </div>
               {% endif %}
           </a>
-          <p>
-            <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">{{ collection.title }}</a>
-          </p>
         </div>
       {% endunless %}
     {% endfor %}
