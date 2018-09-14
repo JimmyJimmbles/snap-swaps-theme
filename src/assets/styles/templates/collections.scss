@@ -7,6 +7,7 @@
   border: 1px solid #ebedef;
   border-radius: 4px;
   background: #fff;
+  height: 100%;
   &:hover {
     transform: translateY(-3px);
     box-shadow: 4px 5px 16px 0 rgba(0, 0, 0, 0.15);
@@ -14,6 +15,7 @@
   .product-image--link {
     padding: 1em;
     color: #2d2d2d;
+    min-height: 414px;
     &:hover {
       color: #2d2d2d;
       text-decoration: unset;
@@ -25,6 +27,7 @@
   max-width: 328px;
   max-height: 328px;
   overflow: hidden;
+  border-radius: 4px;
   &::before {
     content: "";
     position: absolute;
@@ -68,8 +71,6 @@
 }
 .collection-list {
   .product-image--link {
-    padding: 1em;
-    color: #2d2d2d;
     &:hover {
       color: #2d2d2d;
       text-decoration: unset;

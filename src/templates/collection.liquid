@@ -94,28 +94,69 @@
           <h1 class="inner-title">What you could get!</h1>
         </div>
         {% for product in collection.products %}
-        {% if product.template_suffix == 'nobuy' %}
-        {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-          <div class="col-12 col-sm-6 col-md-4">
-            <div class="product-item">
-              {% if product.featured_image != blank %}
-                <a
-                  class="product-image--link"
-                  title="{{ 'collections.general.link_title' | t: title: title }}"
-                  href="{{ product.url | within: collection }}"
-                  role="link">
-                    <img
-                      class="product-image--img img-responsive"
-                      src="{{ product_image }}"
-                      alt="{{ product.title }}">
-                </a>
-              {% endif %}
-              <p>
-                <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-              </p>
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {% if product.template_suffix == 'nobuy' %}
+            {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="product-item">
+                  <a
+                    class="product-image--link"
+                    title="View Product {{ product.title }}"
+                    href="{{ product.url | within: collection }}"
+                    role="link">
+                    {% if product.featured_image != blank %}
+                      <img
+                        class="product-image--img img-responsive"
+                        src="{{ product_image }}"
+                        alt="{{ product.title }}">
+                    {% endif %}
+                      <div class="colletion-details">
+                        <div class="collection-details--name">
+                          <span class="collection--title">{{ product.title }}</span>
+                          <span class="sku text-muted">{{ current_variant.sku }}</span>
+                        </div>
+                        <!-- <div class="collection-details--price">
+                          {% if product.compare_at_price > product.price %}
+
+                            {% if product.price_varies %}
+                              {%- assign sale_price = product.price | money -%}
+                              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                            {% else %}
+                              {{ 'products.product.on_sale' | t }}
+                              {{ product.price | money }}
+                            {% endif %}
+
+                          {% else %}
+
+                            {% if product.price_varies %}
+                              {%- assign price = product.price | money -%}
+                              <span class="collection--price" data-product-price>
+                                {{ 'products.product.from_text_html' | t: price: price }}
+                              </span>
+                            {% else %}
+                              <span class="collection--price" data-product-price>
+                                {{ product.price | money }}
+                              </span>
+                            {% endif %}
+
+                          {% endif %}
+
+                          {% if product.compare_at_price > product.price %}
+                            <span class="visually-hidden">
+                              {{ 'products.product.regular_price' | t }}
+                            </span>
+                            <s>{{ product.compare_at_price | money }}</s>
+                          {% endif %}
+
+                          {% unless product.available %}
+                            {{ 'products.product.sold_out' | t }}
+                          {% endunless %}
+                        </div> -->
+                      </div>
+                  </a>
+              </div>
             </div>
-          </div>
-        {% endif %}
+          {% endif %}
         {% endfor %}
       </div>
     {% endif %}
