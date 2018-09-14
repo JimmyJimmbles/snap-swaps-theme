@@ -15,7 +15,7 @@
           <a
             class="product-image--link"
             href="{{ collection.url }}"
-            title="{{ 'collections.general.link_title' | t: title: title }}"
+            title="View Our {{ collection.title }} Collection"
             role="link">
               {% if collection.image != blank or collection.products.first != blank %}
               <div class="collection-img--wrapper">
@@ -23,7 +23,6 @@
                   class="product-image--img img-responsive"
                   src="{{ collection_image }}"
                   alt="{{ collection.title }}">
-                  {{ 'collections.general.link_title' | t: title: title }}
                 <div class="collection-overlay">
                   <h4 class="collection-overlay--title">
                     {{ collection.title }}

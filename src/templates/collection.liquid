@@ -19,7 +19,7 @@
             <div class="product-item">
                 <a
                   class="product-image--link"
-                  title="{{ 'collections.general.link_title' | t: title: title }}"
+                  title="View Product {{ product.title }}"
                   href="{{ product.url | within: collection }}"
                   role="link">
                   {% if product.featured_image != blank %}
