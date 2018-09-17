@@ -14,9 +14,10 @@
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <li class="nav-item">
             <a
-              class="nav-link active"
+              class="nav-link pill active"
               id="pills-popular-tab"
               data-toggle="pill"
+              data-slide="popularCarousel"
               href="#pills-popular"
               aria-controls="pills-popular"
               aria-selected="true">
@@ -25,9 +26,10 @@
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link pill"
               id="pills-new-tab"
               data-toggle="pill"
+              data-slide="newCarousel"
               href="#pills-new"
               aria-controls="pills-new"
               aria-selected="false">
@@ -36,9 +38,10 @@
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link pill"
               id="pills-special-tab"
               data-toggle="pill"
+              data-slide="specialCarousel"
               href="#pills-special"
               aria-controls="pills-special"
               aria-selected="false">
@@ -50,6 +53,119 @@
       <div class="tab-content">
         <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
           <div id="popularCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                {% for product in collections.popular.products %}
+                  {%- assign current_variant = product.selected_or_first_available_variant -%}
+                  {% if product == empty %}
+                    {%- assign section_onboarding = true -%}
+                  {% endif %}
+                  {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+                  {%- assign mod = forloop.index | modulo: 3 -%}
+                  {% if mod == 1 %}
+                    {%- unless forloop.first -%}
+                    <div class="carousel-item">
+                    {%- endunless -%}
+                  {% endif %}
+                    <div class="col-12 col-sm-4 product-col">
+                      <div class="product-item">
+                          <a
+                            class="product-image--link"
+                            title="View Product {{ product.title }}"
+                            href="{{ product.url | within: collection }}"
+                            role="link">
+                            {% if product.featured_image != blank %}
+                              <img
+                                class="product-image--img img-responsive"
+                                src="{{ product_image }}"
+                                alt="{{ product.title }}">
+                            {% endif %}
+                              <div class="colletion-details">
+                                <div class="collection-details--name">
+                                  <span class="collection--title">{{ product.title }}</span>
+                                  <span class="sku text-muted">{{ current_variant.sku }}</span>
+                                </div>
+                              </div>
+                          </a>
+                      </div>
+                    {% comment %}
+                    <div class="product-box">
+                      <a class="product-image--link" href="{{ product.url }}" role="link">
+                        <img
+                          class="product-image--img"
+                          src="{{ product_image }}"
+                          alt="{{ product.title }}">
+                      </a>
+                      <div class="product-details">
+                        <h3 class="product-title"> {{ product.title }} </h3>
+                        <span class="product-title--sub"> ({{ current_variant.sku }}) </span>
+                        <div class="product-description">
+                          {{ product.description }}
+                        </div>
+                      </div>
+                    </div>
+                    {% endcomment %}
+                  </div>
+                  {% if mod == 0 %}
+                    {%- unless forloop.last -%}
+                    </div>
+                    {%- endunless -%}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
+          <div id="newCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                {% for product in collections.new-arrivals.products %}
+                  {%- assign current_variant = product.selected_or_first_available_variant -%}
+                  {% if product == empty %}
+                    {%- assign section_onboarding = true -%}
+                  {% endif %}
+                  {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+                  {%- assign mod = forloop.index | modulo: 3 -%}
+                  {% if mod == 1 %}
+                    {%- unless forloop.first -%}
+                    <div class="carousel-item">
+                    {%- endunless -%}
+                  {% endif %}
+                    <div class="col-12 col-sm-4 product-col">
+                      <div class="product-item">
+                          <a
+                            class="product-image--link"
+                            title="View Product {{ product.title }}"
+                            href="{{ product.url | within: collection }}"
+                            role="link">
+                            {% if product.featured_image != blank %}
+                              <img
+                                class="product-image--img img-responsive"
+                                src="{{ product_image }}"
+                                alt="{{ product.title }}">
+                            {% endif %}
+                              <div class="colletion-details">
+                                <div class="collection-details--name">
+                                  <span class="collection--title">{{ product.title }}</span>
+                                  <span class="sku text-muted">{{ current_variant.sku }}</span>
+                                </div>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+                  {% if mod == 0 %}
+                    {%- unless forloop.last -%}
+                    </div>
+                    {%- endunless -%}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-special" role="tabpanel" aria-labelledby="pills-special-tab">
+          <div id="specialCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 {% for product in collections.specials.products %}
@@ -65,21 +181,26 @@
                     {%- endunless -%}
                   {% endif %}
                     <div class="col-12 col-sm-4 product-col">
-                    <div class="product-box">
-                      <a class="product-image--link" href="{{ product.url }}" role="link">
-                        <img
-                          class="product-image--img"
-                          src="{{ product_image }}"
-                          alt="{{ product.title }}">
-                      </a>
-                      <div class="product-details">
-                        <h3 class="product-title"> {{ product.title }} </h3>
-                        <span class="product-title--sub"> ({{ current_variant.sku }}) </span>
-                        <p class="product-description">
-                          {{ product.description }}
-                        </p>
+                      <div class="product-item">
+                          <a
+                            class="product-image--link"
+                            title="View Product {{ product.title }}"
+                            href="{{ product.url | within: collection }}"
+                            role="link">
+                            {% if product.featured_image != blank %}
+                              <img
+                                class="product-image--img img-responsive"
+                                src="{{ product_image }}"
+                                alt="{{ product.title }}">
+                            {% endif %}
+                              <div class="colletion-details">
+                                <div class="collection-details--name">
+                                  <span class="collection--title">{{ product.title }}</span>
+                                  <span class="sku text-muted">{{ current_variant.sku }}</span>
+                                </div>
+                              </div>
+                          </a>
                       </div>
-                    </div>
                   </div>
                   {% if mod == 0 %}
                     {%- unless forloop.last -%}
@@ -90,85 +211,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="tab-pane fade" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
-          <!-- <div id="newCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              {%- comment -%}
-                Loop through each product and display them accordingly.
-              {%- endcomment -%}
-              {%- assign i = 0 -%}
-              {% for product in collections.specials.products %}
-
-              {%- assign current_variant = product.selected_or_first_available_variant -%}
-
-              {% if product == empty %}
-                {%- assign section_onboarding = true -%}
-              {% endif %}
-
-              {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-              {%- assign i = i | plus: 1 -%}
-
-              {% if i == 1 %}
-                <div class="carousel-item  active">
-              {% else %}
-                <div class="carousel-item">
-              {% endif %}
-                <div class="col-12 col-sm-4">
-                  <div class="product">
-                    <a class="product-image--link" href="{{ product.url }}" role="link">
-                      <img
-                        class="product-image--img"
-                        src="{{ product_image }}"
-                        alt="{{ product.title }}">
-                    </a>
-                    <div class="product-details">
-                      <h3 class="product-title"> {{ product.title }} </h3>
-                      <span class="product-title--sub"> ({{ current_variant.sku }}) </span>
-                      <p class="product-description">
-                        {{ product.description }}
-                      </p>
-                      <form
-                        class="add-to-cart--form"
-                        data-productid="{{product.id}}"
-                        action="/cart/add"
-                        method="post">
-                          <div class="input-wrapper">
-                            <input type="hidden" name="quantity" id="quantity" value="1">
-                            <input
-                              type="hidden"
-                              name="id"
-                              data-productid="{{product.id}}"
-                              class="product-select"
-                              value="{{ product.variants[0].id }}"
-                              data-variant-title="{{ product.variants[0].title }}">
-                          </div>
-                          <button
-                            class="add-to-cart--btn"
-                            type="submit"
-                            name="add"
-                            data-add-to-cart
-                            {% unless product.available %}disabled="disabled"{% endunless %}
-                            {% if section_onboarding %}disabled="disabled"{% endif %}>
-                              <span data-add-to-cart-text>
-                                {% if product.available %}
-                                  {{ 'products.product.add_to_cart' | t }}
-                                {% else %}
-                                  {{ 'products.product.sold_out' | t }}
-                                {% endif %}
-                              </span>
-                          </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div> -->
-        </div>
-        <div class="tab-pane fade" id="pills-special" role="tabpanel" aria-labelledby="pills-special-tab">
-
         </div>
       </div>
     </div>

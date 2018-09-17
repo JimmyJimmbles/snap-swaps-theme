@@ -1,12 +1,17 @@
-.footer{
-  border-image: url(https://cdn.shopify.com/s/files/1/0077/5815/1739/files/colorful-border-new.png?3805994746170471431) 9% round;
+.footer {
+  -webkit-border-image: url(https://cdn.shopify.com/s/files/1/0077/5815/1739/files/colorful-border-new.png?3805994746170471431)
+    9% round;
+  -o-border-image: url(https://cdn.shopify.com/s/files/1/0077/5815/1739/files/colorful-border-new.png?3805994746170471431)
+    9% round;
+  border-image: url(https://cdn.shopify.com/s/files/1/0077/5815/1739/files/colorful-border-new.png?3805994746170471431)
+    9% round;
   border-top: 6px solid transparent;
   background: #141415;
   color: #fff;
   padding: 4em 0 0;
   margin-top: -1px;
 }
-.warning-message{
+.warning-message {
   font-size: 13px;
 }
 .bottom-bar {
@@ -15,29 +20,30 @@
 .footer-list {
   padding: 0;
   margin: 0;
-  .footer-list--item{
+  .footer-list--item {
     list-style: none;
     margin-bottom: 0.5em;
-    .item--link{
+    .item--link {
       color: #fff;
       text-transform: uppercase;
     }
   }
 }
-.footer-contact{
+.footer-contact {
   position: relative;
   display: block;
   max-width: 100%;
-  .simple-link{
+  .simple-link {
     color: #fff;
   }
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     max-width: 65%;
   }
 }
-.footer-header{
+.footer-header {
   display: block;
   font-weight: 700;
+  color: #fff;
   text-transform: uppercase;
   padding-bottom: 0.75em;
   margin-bottom: 0.75em;

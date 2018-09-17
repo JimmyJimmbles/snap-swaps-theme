@@ -9,42 +9,45 @@
 <div class="container page-container collection-list">
   <div class="row">
     {% for collection in collections %}
-      {% unless collection.handle == 'frontpage' %}
-        {% capture collection_image %} {{ collection | img_url: '500x500' }} {% endcapture %}
-        <div class="col-12 col-sm-6 col-md-4">
-          <a
-            class="product-image--link"
-            href="{{ collection.url }}"
-            title="View Our {{ collection.title }} Collection"
-            role="link">
-              {% if collection.image != blank or collection.products.first != blank %}
+    {% unless collection.handle == 'frontpage'
+      or collection.handle == 'new-arrivals'
+      or collection.handle == 'specials'
+      or collection.handle == 'popular' %}
+      {% capture collection_image %} {{ collection | img_url: '500x500' }} {% endcapture %}
+      <div class="col-12 col-sm-6 col-md-4 mb-5">
+        <a
+          class="product-image--link"
+          href="{{ collection.url }}"
+          title="View Our {{ collection.title }} Collection"
+          role="link">
+            {% if collection.image != blank or collection.products.first != blank %}
+            <div class="collection-img--wrapper">
+              <img
+                class="product-image--img img-responsive"
+                src="{{ collection_image }}"
+                alt="{{ collection.title }}">
+              <div class="collection-overlay">
+                <h4 class="collection-overlay--title">
+                  {{ collection.title }}
+                </h4>
+              </div>
+            </div>
+            {% else %}
+              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
               <div class="collection-img--wrapper">
-                <img
-                  class="product-image--img img-responsive"
-                  src="{{ collection_image }}"
-                  alt="{{ collection.title }}">
+                {{ 'collection-' | append: current
+                  | placeholder_svg_tag:
+                  'placeholder-svg placeholder-svg--small' }}
                 <div class="collection-overlay">
                   <h4 class="collection-overlay--title">
                     {{ collection.title }}
                   </h4>
                 </div>
               </div>
-              {% else %}
-                {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-                <div class="collection-img--wrapper">
-                  {{ 'collection-' | append: current
-                    | placeholder_svg_tag:
-                    'placeholder-svg placeholder-svg--small' }}
-                  <div class="collection-overlay">
-                    <h4 class="collection-overlay--title">
-                      {{ collection.title }}
-                    </h4>
-                  </div>
-                </div>
-              {% endif %}
-          </a>
-        </div>
-      {% endunless %}
+            {% endif %}
+        </a>
+      </div>
+    {% endunless %}
     {% endfor %}
   </div>
 </div>

@@ -2,12 +2,18 @@
   position: relative;
   background: #333333;
   z-index: 0;
-  padding: 1em;
+  padding: 1em 0 4em;
+  .carousel-inner {
+    // overflow: unset;
+  }
 }
 .pill-container {
   position: relative;
   width: 100%;
   margin: 2em 0 3em;
+}
+.tab-content {
+  width: 100%;
 }
 .nav-pills {
   align-items: center;

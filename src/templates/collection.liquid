@@ -22,7 +22,7 @@
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {% if product.template_suffix != 'nobuy' %}
             {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-4 mb-5">
               <div class="product-item">
                   <a
                     class="product-image--link"
@@ -97,7 +97,7 @@
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {% if product.template_suffix == 'nobuy' %}
             {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-4 mb-5">
               <div class="product-item">
                   <a
                     class="product-image--link"
@@ -115,7 +115,7 @@
                           <span class="collection--title">{{ product.title }}</span>
                           <span class="sku text-muted">{{ current_variant.sku }}</span>
                         </div>
-                        <!-- <div class="collection-details--price">
+                        <div class="collection-details--price">
                           {% if product.compare_at_price > product.price %}
 
                             {% if product.price_varies %}
@@ -151,7 +151,7 @@
                           {% unless product.available %}
                             {{ 'products.product.sold_out' | t }}
                           {% endunless %}
-                        </div> -->
+                        </div>
                       </div>
                   </a>
               </div>
