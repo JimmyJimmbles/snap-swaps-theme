@@ -9,175 +9,138 @@
   {% endif %}
 </header>
 <div class="container page-container product-container">
-  {% paginate collection.products by 12 %}
-    {% if collection.all_products_count == 0 %}
-      <div class="row">
-        <div class="col-12">
-          <p>{{ 'collections.general.no_matches' | t }}</p>
-        </div>
+  {% if collection.all_products_count == 0 %}
+    <div class="row">
+      <div class="col-12">
+        <p>{{ 'collections.general.no_matches' | t }}</p>
       </div>
-    {% else %}
-      <div class="row">
-        {% for product in collection.products %}
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {% if product.template_suffix != 'nobuy' %}
-            {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-            <div class="col-12 col-sm-6 col-md-4 mb-5">
-              <div class="product-item">
-                  <a
-                    class="product-image--link"
-                    title="View Product {{ product.title }}"
-                    href="{{ product.url | within: collection }}"
-                    role="link">
-                    {% if product.featured_image != blank %}
-                      <img
-                        class="product-image--img img-responsive"
-                        src="{{ product_image }}"
-                        alt="{{ product.title }}">
-                    {% endif %}
-                      <div class="colletion-details">
-                        <div class="collection-details--name">
-                          <span class="collection--title">{{ product.title }}</span>
-                          <span class="sku text-muted">{{ current_variant.sku }}</span>
-                        </div>
-                        <div class="collection-details--price">
-                          {% if product.compare_at_price > product.price %}
-
-                            {% if product.price_varies %}
-                              {%- assign sale_price = product.price | money -%}
-                              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                            {% else %}
-                              {{ 'products.product.on_sale' | t }}
-                              {{ product.price | money }}
-                            {% endif %}
-
-                          {% else %}
-
-                            {% if product.price_varies %}
-                              {%- assign price = product.price | money -%}
-                              <span class="collection--price" data-product-price>
-                                {{ 'products.product.from_text_html' | t: price: price }}
-                              </span>
-                            {% else %}
-                              <span class="collection--price" data-product-price>
-                                {{ product.price | money }}
-                              </span>
-                            {% endif %}
-
-                          {% endif %}
-
-                          {% if product.compare_at_price > product.price %}
-                            <span class="visually-hidden">
-                              {{ 'products.product.regular_price' | t }}
-                            </span>
-                            <s>{{ product.compare_at_price | money }}</s>
-                          {% endif %}
-
-                          {% unless product.available %}
-                            {{ 'products.product.sold_out' | t }}
-                          {% endunless %}
-                        </div>
+    </div>
+  {% else %}
+    <div class="row">
+      {% for product in collection.products %}
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        {% if product.template_suffix != 'nobuy' %}
+          {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+          <div class="col-12 col-sm-6 col-md-4 mb-5">
+            <div class="product-item">
+                <a
+                  class="product-image--link"
+                  title="View Product {{ product.title }}"
+                  href="{{ product.url | within: collection }}"
+                  role="link">
+                  {% if product.featured_image != blank %}
+                    <img
+                      class="product-image--img img-responsive"
+                      src="{{ product_image }}"
+                      alt="{{ product.title }}">
+                  {% endif %}
+                    <div class="colletion-details">
+                      <div class="collection-details--name">
+                        <span class="collection--title">{{ product.title }}</span>
+                        <span class="sku text-muted">{{ current_variant.sku }}</span>
                       </div>
-                  </a>
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <span class="divider"></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <h1 class="inner-title">What you could get!</h1>
-        </div>
-        {% for product in collection.products %}
-          {%- assign current_variant = product.selected_or_first_available_variant -%}
-          {% if product.template_suffix == 'nobuy' %}
-            {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
-            <div class="col-12 col-sm-6 col-md-4 mb-5">
-              <div class="product-item">
-                  <a
-                    class="product-image--link"
-                    title="View Product {{ product.title }}"
-                    href="{{ product.url | within: collection }}"
-                    role="link">
-                    {% if product.featured_image != blank %}
-                      <img
-                        class="product-image--img img-responsive"
-                        src="{{ product_image }}"
-                        alt="{{ product.title }}">
-                    {% endif %}
-                      <div class="colletion-details">
-                        <div class="collection-details--name">
-                          <span class="collection--title">{{ product.title }}</span>
-                          <span class="sku text-muted">{{ current_variant.sku }}</span>
-                        </div>
-                        <div class="collection-details--price">
-                          {% if product.compare_at_price > product.price %}
+                      <div class="collection-details--price">
+                        {% if product.compare_at_price > product.price %}
 
-                            {% if product.price_varies %}
-                              {%- assign sale_price = product.price | money -%}
-                              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                            {% else %}
-                              {{ 'products.product.on_sale' | t }}
-                              {{ product.price | money }}
-                            {% endif %}
-
+                          {% if product.price_varies %}
+                            {%- assign sale_price = product.price | money -%}
+                            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
                           {% else %}
-
-                            {% if product.price_varies %}
-                              {%- assign price = product.price | money -%}
-                              <span class="collection--price" data-product-price>
-                                {{ 'products.product.from_text_html' | t: price: price }}
-                              </span>
-                            {% else %}
-                              <span class="collection--price" data-product-price>
-                                {{ product.price | money }}
-                              </span>
-                            {% endif %}
-
+                            {{ 'products.product.on_sale' | t }}
+                            {{ product.price | money }}
                           {% endif %}
 
-                          {% if product.compare_at_price > product.price %}
-                            <span class="visually-hidden">
-                              {{ 'products.product.regular_price' | t }}
+                        {% else %}
+
+                          {% if product.price_varies %}
+                            {%- assign price = product.price | money -%}
+                            <span class="collection--price" data-product-price>
+                              {{ 'products.product.from_text_html' | t: price: price }}
                             </span>
-                            <s>{{ product.compare_at_price | money }}</s>
+                          {% else %}
+                            <span class="collection--price" data-product-price>
+                              {{ product.price | money }}
+                            </span>
                           {% endif %}
 
-                          {% unless product.available %}
-                            {{ 'products.product.sold_out' | t }}
-                          {% endunless %}
-                        </div>
+                        {% endif %}
+
+                        {% if product.compare_at_price > product.price %}
+                          <span class="visually-hidden">
+                            {{ 'products.product.regular_price' | t }}
+                          </span>
+                          <s>{{ product.compare_at_price | money }}</s>
+                        {% endif %}
+
+                        {% unless product.available %}
+                          {{ 'products.product.sold_out' | t }}
+                        {% endunless %}
                       </div>
-                  </a>
-              </div>
+                    </div>
+                </a>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-      {% for i in (1..8) %}
-        <a href="#">
-          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-        </a>
-
-        <p>
-          <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
-        </p>
-
-        <p>
-          {{ 1999 | money }}
-        </p>
+          </div>
+        {% endif %}
       {% endfor %}
-    {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <span class="divider"></span>
+      </div>
+    </div>
+    {% paginate collection.products by 12 %}
+      <div class="row">
+      <div class="col-12">
+        <h1 class="inner-title">What you could get!</h1>
+      </div>
+      {% for product in collection.products %}
+        {%- assign current_variant = product.selected_or_first_available_variant -%}
+        {% if product.template_suffix == 'nobuy' %}
+          {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
+            <div class="product-item">
+                <a
+                  class="product-image--link"
+                  title="View Product {{ product.title }}"
+                  href="{{ product.url | within: collection }}"
+                  role="link">
+                  {% if product.featured_image != blank %}
+                    <img
+                      class="product-image--img img-responsive"
+                      src="{{ product_image }}"
+                      alt="{{ product.title }}">
+                  {% endif %}
+                    <div class="colletion-details">
+                      <div class="collection-details--name">
+                        <span class="collection--title">{{ product.title }}</span>
+                        <span class="sku text-muted">{{ current_variant.sku }}</span>
+                      </div>
+                    </div>
+                </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
     {% if paginate.pages > 1 %}
       {% include 'pagination' %}
     {% endif %}
-  {% endpaginate %}
+    {% endpaginate %}
+  {% endif %}
+  {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+    {% for i in (1..8) %}
+      <a href="#">
+        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+      </a>
+
+      <p>
+        <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+      </p>
+
+      <p>
+        {{ 1999 | money }}
+      </p>
+    {% endfor %}
+  {% endif %}
 </div>
