@@ -15,7 +15,7 @@
   <header class="header hero-header" role="banner">
     <div class="container-fluid">
       <div class="row justify-content-between align-items-center">
-        <div class="hero-image col-12 col-md">
+        <div class="hero-image col-12 col-md-4">
           <a class="hero-link home-link" href="/">
             {% if section.settings.logo != blank %}
               {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
@@ -28,7 +28,7 @@
             {% endif %}
           </a>
         </div>
-        <div class="hero-info col-12 col-md-4">
+        <div class="hero-info col-12 col-md">
           <div class="hero-info--details">
             <div class="hero-info--contact">
               <a class="simple-link" href="tel:#">806 555-5555</a>

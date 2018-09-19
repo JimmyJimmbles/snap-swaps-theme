@@ -8,7 +8,52 @@
     <div class="col-12">
       {% if cart.item_count > 0 %}
         <form action="/cart" method="post" novalidate>
-          <table class="responsive-table">
+          {% for item in cart.items %}
+            <div class="cart-item">
+              <div class="cart-item-single">
+                <div class="cart-item--image">
+                  {% if item.image != blank %}
+                    <a
+                      class="cart-item--image-link"
+                      href="{{ item.url | within: collections.all }}"
+                      role="link">
+                        {{ item | img_url: '240x240' | img_tag: item.title }}
+                    </a>
+                  {% endif %}
+                </div>
+                <div class="cart-item--details">
+                  <h4 class="cart-item--title">
+                    {{ item.product.title }}
+                    {% unless item.product.has_only_default_variant %}
+                      {{ item.variant.title }}
+                    {% endunless %}
+                  </h4>
+                  <p class="cart-item--vendor">{{ item.vendor }}</p>
+                  <p class="cart-item--sku sku text-muted"> {{ item.sku }} </p>
+                  <div class="cart-item--controls">
+                    <input type="number"
+                           class="form-control quantity"
+                           name="updates[]"
+                           id="updates_{{ item.key }}"
+                           value="{{ item.quantity }}"
+                           min="0"
+                           aria-label="{{ 'cart.general.item_quantity' | t }}">
+                  </div>
+                </div>
+                <div class="cart-item--actions">
+                  <span
+                    class="cart-item--price"
+                    data-label="{{ 'cart.label.total' | t }}">
+                      {{ item.line_price | money }}
+                  </span>
+                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                    <small>{{ 'cart.general.remove' | t }}</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          <!-- <table class="responsive-table">
             <thead class="small--hide">
               <tr>
                 <th colspan="2">{{ 'cart.label.product' | t }}</th>
@@ -95,7 +140,7 @@
 
               {% endfor %}
             </tbody>
-          </table>
+          </table> -->
 
           {% if settings.cart_notes_enable %}
             <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>

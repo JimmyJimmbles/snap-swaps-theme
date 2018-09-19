@@ -24,7 +24,7 @@
 .hero-info--details {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 1.5em;
 
 	.hero-info--social {
@@ -34,6 +34,7 @@
 	.hero-info--contact {
     position: relative;
     display: block;
+		padding: 0 2em 0 0;
 	}
 }
 
