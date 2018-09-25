@@ -1,0 +1,37 @@
+.customer-form {
+  position: relative;
+  display: block;
+  padding: 0.5em 2em 2em;
+  border-radius: 5px;
+  max-width: 50%;
+  margin: 0 auto;
+  .form-control {
+    font-size: 1em;
+    border: 1px solid #eaeaea;
+    color: #585858;
+    background: rgba(238, 238, 239, 0.5);
+    transition: all 0.3s ease;
+    padding: 0.75em;
+    &:focus {
+      border: 1px solid #dedede;
+      background-color: #fcfeff;
+      box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .customer-form--btn {
+    background: #00adee;
+    display: block;
+    border: none;
+    text-align: center;
+    margin: 1.75em auto;
+    color: #fff;
+    width: 100%;
+    padding: 0.75em 0;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    border-radius: 100px;
+    &:hover {
+      background: #0088bb;
+    }
+  }
+}
