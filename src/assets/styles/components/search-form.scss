@@ -1,3 +1,30 @@
+.page-search {
+  .search-input {
+    background: unset;
+    border: unset;
+    padding: unset;
+    border-radius: unset;
+    width: 35%;
+    .search-input--light {
+      border: 1px solid #eaeaea;
+      color: #585858;
+      background: rgba(238, 238, 239, 0.5);
+      transition: all 0.3s ease;
+      padding: 0.375rem 2rem;
+      width: 100%;
+      border-radius: 100px;
+      &:focus {
+        border: 1px solid #dedede;
+        background-color: #fcfeff;
+        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1);
+      }
+    }
+    .button {
+      color: #585858;
+      right: 2rem;
+    }
+  }
+}
 .search-input {
   position: relative;
   display: inline-block;
@@ -21,7 +48,7 @@
     }
   }
 
-  .button{
+  .button {
     position: absolute;
     background: transparent;
     color: #fff;
@@ -29,5 +56,4 @@
     bottom: 0;
     right: 0.45em;
   }
-
 }

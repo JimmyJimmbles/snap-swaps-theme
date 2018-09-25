@@ -14,7 +14,22 @@
 <div class="container page-container">
   <div class="row">
     <div class="col-12">
-      <form action="/search" method="get" role="search">
+      <div class="search-wrapper mb-3">
+        <form class="search-form page-search" action="/search" method="get" role="search">
+          <div class="search-input">
+            <input type="search"
+              class="search-input--light"
+              name="q"
+              id="PageSearch"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.placeholder' | t }}">
+            <button type="submit" class="button">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- <form action="/search" method="get" role="search">
         <label for="Search" class="label-hidden">
           {{ 'general.search.placeholder' | t }}
         </label>
@@ -27,7 +42,7 @@
           {% include 'icon-search' %}
           <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
         </button>
-      </form>
+      </form> -->
       {% if search.performed %}
         {% if search.results_count == 0 %}
           <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
