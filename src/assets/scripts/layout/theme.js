@@ -11,6 +11,15 @@ import '../../styles/theme.scss.liquid';
 import {focusHash, bindInPageLinks} from '@shopify/theme-a11y';
 import {cookiesEnabled} from '@shopify/theme-cart';
 
+// Adds parallax scrolling on window scroll
+window.onscroll = function() {
+	parallaxScroll();
+}
+function parallaxScroll() {
+  let hero = document.querySelector('.parallax');
+  let scroll = document.documentElement.scrollTop;
+  hero.style.backgroundPositionY = -(scroll * 0.0325) + "rem";
+}
 // Common a11y fixes
 focusHash();
 bindInPageLinks();
