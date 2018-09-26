@@ -35,6 +35,15 @@
   max-width: 100%;
   .simple-link {
     color: #fff;
+    background: linear-gradient(to right, #fff 100%, #fff 0);
+    background-repeat: no-repeat;
+    background-size: 0 2.5px;
+    background-position: left 90%;
+    &:hover {
+      color: inherit;
+      background-size: 100% 2.5px;
+      text-decoration: none;
+    }
   }
   @media (min-width: 768px) {
     max-width: 65%;
