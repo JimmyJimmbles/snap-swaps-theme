@@ -10,6 +10,54 @@
   transition: all 0.5s ease;
   padding-bottom: 5px;
   text-decoration: none;
+  &.red {
+    color: $playful-red;
+    background: linear-gradient(to right, $playful-red 100%, $playful-red 0);
+    background-repeat: no-repeat;
+    background-size: 0 2.5px;
+    background-position: left 90%;
+    &:hover {
+      color: $playful-red;
+    }
+  }
+  &.blue {
+    color: $playful-blue;
+    background: linear-gradient(to right, $playful-blue 100%, $playful-blue 0);
+    background-repeat: no-repeat;
+    background-size: 0 2.5px;
+    background-position: left 90%;
+    &:hover {
+      color: $playful-blue;
+    }
+  }
+  &.yellow {
+    color: $playful-yellow;
+    background: linear-gradient(
+      to right,
+      $playful-yellow 100%,
+      $playful-yellow 0
+    );
+    background-repeat: no-repeat;
+    background-size: 0 2.5px;
+    background-position: left 90%;
+    &:hover {
+      color: $playful-yellow;
+    }
+  }
+  &.green {
+    color: $playful-green;
+    background: linear-gradient(
+      to right,
+      $playful-green 100%,
+      $playful-green 0
+    );
+    background-repeat: no-repeat;
+    background-size: 0 2.5px;
+    background-position: left 90%;
+    &:hover {
+      color: $playful-green;
+    }
+  }
   &:hover {
     color: inherit;
     background-size: 100% 2.5px;
