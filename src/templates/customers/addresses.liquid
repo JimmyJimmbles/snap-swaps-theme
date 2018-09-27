@@ -1,6 +1,6 @@
 {% paginate customer.addresses by 5 %}
   <header id="header-{{ page.handle }}" class="page-header parallax" role="heading">
-    <div class="header-title">
+    <div class="header-title blue">
       <h1 class="header-title--text">{{ 'customer.account.title' | t }}</h1>
     </div>
     <div class="header-content">
@@ -209,23 +209,36 @@
 
         {% for address in customer.addresses %}
 
-          {% if address == customer.default_address %}
-            <p><strong>{{ 'customer.addresses.default' | t }}</strong></p>
-          {% endif %}
-          {{ address | format_address }}
+          <div class="customer-form form-lg">
+            <div class="row">
+              <div class="col-12">
+                {% if address == customer.default_address %}
+                  <p><strong>{{ 'customer.addresses.default' | t }}</strong></p>
+                {% endif %}
+              </div>
+              <div class="col-12">
+                {{ address | format_address }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <button type="button" class="address-edit-toggle pill-btn blue" data-form-id="{{ address.id }}">
+                  {{ 'customer.addresses.edit' | t }}
+                </button>
+              </div>
+              <div class="col-12 col-sm-6">
+                <button type="button" class="address-delete pill-btn red" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+                  {{ 'customer.addresses.delete' | t }}
+                </button>
+              </div>
+            </div>
+            <!-- <p>
+            {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} |
+            {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }}
+            </p> -->
+          </div>
 
-          <button type="button" class="address-edit-toggle" data-form-id="{{ address.id }}">
-            {{ 'customer.addresses.edit' | t }}
-          </button>
-          <button type="button" class="address-delete" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
-            {{ 'customer.addresses.delete' | t }}
-          </button>
-          <!-- <p>
-          {{ 'customer.addresses.edit' | t | edit_customer_address_link: address.id }} |
-          {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }}
-          </p> -->
-
-          <div id="EditAddress_{{ address.id }}" class="hide">
+          <div id="EditAddress_{{ address.id }}" class="hide customer-form form-lg">
             {% form 'customer_address', address %}
 
             <h4>{{ 'customer.addresses.edit_address' | t }}</h4>
