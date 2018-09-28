@@ -5,7 +5,7 @@
     </div>
     <div class="header-content">
       <button type="button" class="button address-new-toggle pill-btn blue">
-        {{ 'customer.addresses.add_new' | t }}
+        <span>{{ 'customer.addresses.add_new' | t }}</span>
       </button>
     </div>
   </header>
@@ -188,12 +188,14 @@
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="form-group form--btn">
-                <input type="submit" class="button customer-form--btn" value="{{ 'customer.addresses.add' | t }}">
+                <button type="submit" class="button pill-btn blue" value="{{ 'customer.addresses.add' | t }}">
+                  <span>Add Address</span>
+                </button>
               </div>
             </div>
             <div class="col-12 col-sm-6">
-              <button type="button" class="customer-form--btn cancle address-new-toggle">
-                {{ 'customer.addresses.cancel' | t }}
+              <button type="button" class="pill-btn red address-new-toggle">
+                <span>{{ 'customer.addresses.cancel' | t }}</span>
               </button>
             </div>
           </div>
@@ -223,13 +225,20 @@
             </div>
             <div class="row">
               <div class="col-12 col-sm-6">
-                <button type="button" class="address-edit-toggle pill-btn blue" data-form-id="{{ address.id }}">
-                  {{ 'customer.addresses.edit' | t }}
+                <button
+                  type="button"
+                  class="address-edit-toggle pill-btn blue"
+                  data-form-id="{{ address.id }}">
+                    <span>{{ 'customer.addresses.edit' | t }}</span>
                 </button>
               </div>
               <div class="col-12 col-sm-6">
-                <button type="button" class="address-delete pill-btn red" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
-                  {{ 'customer.addresses.delete' | t }}
+                <button
+                  type="button"
+                  class="address-delete pill-btn red"
+                  data-form-id="{{ address.id }}"
+                  data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+                    <span>{{ 'customer.addresses.delete' | t }}</span>
                 </button>
               </div>
             </div>
@@ -408,12 +417,14 @@
             <div class="row">
               <div class="col-12 col-sm-6">
                 <div class="form-group form--btn">
-                  <input type="submit" class="button customer-form--btn" value="{{ 'customer.addresses.update' | t }}">
+                  <button type="submit" class="button pill-btn blue" value="{{ 'customer.addresses.update' | t }}">
+                    <span>Update Address</span>
+                  </button>
                 </div>
               </div>
               <div class="col-12 col-sm-6">
-                <button type="button" class="customer-form--btn cancle address-edit-toggle" data-form-id="{{ form.id }}">
-                  {{ 'customer.addresses.cancel' | t }}
+                <button type="button" class="button pill-btn red address-edit-toggle" data-form-id="{{ form.id }}">
+                  <span>{{ 'customer.addresses.cancel' | t }}</span>
                 </button>
               </div>
             </div>
