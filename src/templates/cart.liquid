@@ -4,93 +4,133 @@
   </div>
 </header>
 <div class="container page-container">
-  <div class="row">
-    <div class="col-12">
-      {% if cart.item_count > 0 %}
-        <form action="/cart" method="post" novalidate>
-          {% for item in cart.items %}
-            <div class="cart-item">
-              <div class="cart-item-single">
-                <div class="cart-item--image">
-                  {% if item.image != blank %}
-                    <a
-                      class="cart-item--image-link"
-                      href="{{ item.url | within: collections.all }}"
-                      role="link">
-                        {{ item | img_url: '240x240' | img_tag: item.title }}
-                    </a>
-                  {% endif %}
-                </div>
-                <div class="cart-item--details">
-                  <h4 class="cart-item--title">
-                    {{ item.product.title }}
-                    {% unless item.product.has_only_default_variant %}
-                      {{ item.variant.title }}
-                    {% endunless %}
-                  </h4>
-                  <p class="cart-item--vendor">{{ item.vendor }}</p>
-                  <p class="cart-item--sku sku text-muted"> {{ item.sku }} </p>
-                  <div class="cart-item--controls">
-                    <input type="number"
-                           class="form-control quantity"
-                           name="updates[]"
-                           id="updates_{{ item.key }}"
-                           value="{{ item.quantity }}"
-                           min="0"
-                           aria-label="{{ 'cart.general.item_quantity' | t }}">
+  {% if cart.item_count > 0 %}
+    <div id="CustomerCart" class="customer-form">
+      <form action="/cart" method="post" novalidate>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <div class="form-group">
+              <button class="button pill-btn blue" type="submit" name="update" value="{{ 'cart.general.update' | t }}">
+                <span>Update Cart</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="form-group">
+              <button class="button pill-btn green" type="submit" name="checkout" class="button" value="{{ 'cart.general.checkout' | t }}">
+                <span>Check Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        {% for item in cart.items %}
+          <div class="row">
+            <div class="col-12">
+              <div class="cart-item">
+                <div class="cart-item-single">
+                  <div class="cart-item--image">
+                    {% if item.image != blank %}
+                      <a
+                        class="cart-item--image-link"
+                        href="{{ item.url | within: collections.all }}"
+                        role="link">
+                          {{ item | img_url: '240x240' | img_tag: item.title }}
+                      </a>
+                    {% endif %}
                   </div>
-                </div>
-                <div class="cart-item--actions">
-                  <span
-                    class="cart-item--price"
-                    data-label="{{ 'cart.label.total' | t }}">
-                      {{ item.line_price | money }}
-                  </span>
-                  <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
-                    <small>{{ 'cart.general.remove' | t }}</small>
-                  </a>
+                  <div class="cart-item--details">
+                    <h4 class="cart-item--title">
+                      {{ item.product.title }}
+                      {% unless item.product.has_only_default_variant %}
+                        {{ item.variant.title }}
+                      {% endunless %}
+                    </h4>
+                    <p class="cart-item--vendor">{{ item.vendor }}</p>
+                    <p class="cart-item--sku sku text-muted"> {{ item.sku }} </p>
+                    <div class="cart-item--controls">
+                      <input type="number"
+                             class="form-control quantity"
+                             name="updates[]"
+                             id="updates_{{ item.key }}"
+                             value="{{ item.quantity }}"
+                             min="0"
+                             aria-label="{{ 'cart.general.item_quantity' | t }}">
+                    </div>
+                  </div>
+                  <div class="cart-item--actions">
+                    <span
+                      class="cart-item--price"
+                      data-label="{{ 'cart.label.total' | t }}">
+                        {{ item.line_price | money }}
+                    </span>
+                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                      <small>{{ 'cart.general.remove' | t }}</small>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          {% endfor %}
+          </div>
+        {% endfor %}
 
-          {% if settings.cart_notes_enable %}
-            <div class="form-group">
-              <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
-              <textarea class="form-control" name="note" id="CartSpecialInstructions">
-                {{ cart.note }}
-              </textarea>
+        {% if settings.cart_notes_enable %}
+          <div class="row mt-4 mb-4">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+                <textarea class="form-control" name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+              </div>
             </div>
-          {% endif %}
+          </div>
+        {% endif %}
 
-          <p>{{ 'cart.general.subtotal' | t }}</p>
-          <p>{{ cart.total_price | money }}</p>
-          {% if cart.total_discounts > 0 %}
-            <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
-          {% endif %}
-          <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
-          <input type="submit" name="update" value="{{ 'cart.general.update' | t }}">
-          <input type="submit" name="checkout" class="button" value="{{ 'cart.general.checkout' | t }}">
-        </form>
-      {% else %}
-        {% comment %}
-        Cart empty state
-        {% endcomment %}
-        <div class="supports-cookies">
-          <p>{{ 'cart.general.empty' | t }}</p>
-          <p>Continue browsing <a href="/collections">here</a>.</p>
+        <div class="row">
+          <div class="col-12">
+            <div class="cart-total">
+              <span class="total-price">{{ 'cart.general.subtotal' | t }}</span>
+              <span class="total-price">{{ cart.total_price | money }}</span>
+            </div>
+            {% if cart.total_discounts > 0 %}
+              <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+            {% endif %}
+            <p>{{ 'cart.general.shipping_at_checkout' | t }}</p>
+          </div>
         </div>
-
-        {% comment %}
-        Cart no cookies state
-        ---------------------
-        Browser cookies are required to use the cart. If cookies aren't enabled in the
-        browser a message is displayed prompting the user to enable them.
-        {% endcomment %}
-        <div class="supports-no-cookies">
-          <p>{{ 'cart.general.cookies_required' | t }}</p>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <div class="form-group">
+              <button class="button pill-btn blue" type="submit" name="update" value="{{ 'cart.general.update' | t }}">
+                <span>Update Cart</span>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="form-group">
+              <button class="button pill-btn green" type="submit" name="checkout" class="button" value="{{ 'cart.general.checkout' | t }}">
+                <span>Check Out</span>
+              </button>
+            </div>
+          </div>
         </div>
-      {% endif %}
+      </form>
     </div>
-  </div>
+  {% else %}
+    {% comment %}
+    Cart empty state
+    {% endcomment %}
+    <div class="supports-cookies">
+      <p>{{ 'cart.general.empty' | t }}</p>
+      <p>Continue browsing <a href="/collections">here</a>.</p>
+    </div>
+
+    {% comment %}
+    Cart no cookies state
+    ---------------------
+    Browser cookies are required to use the cart. If cookies aren't enabled in the
+    browser a message is displayed prompting the user to enable them.
+    {% endcomment %}
+    <div class="supports-no-cookies">
+      <p>{{ 'cart.general.cookies_required' | t }}</p>
+    </div>
+  {% endif %}
 </div>

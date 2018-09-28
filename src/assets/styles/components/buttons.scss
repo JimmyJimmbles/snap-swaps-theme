@@ -10,6 +10,7 @@
   appearance: none;
 }
 .pill-btn {
+  position: relative;
   display: block;
   border: none;
   text-align: center;
@@ -20,28 +21,55 @@
   text-transform: uppercase;
   transition: 0.2s ease;
   border-radius: 100px;
+  span {
+    position: relative;
+    display: block;
+    z-index: 1;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: all 0.4s ease;
+    border-radius: 100px;
+  }
   &.red {
     background: $playful-red;
     &:hover {
-      background: darken($playful-red, 10%);
+      &::after {
+        width: 100%;
+        background: darken($playful-red, 10%);
+      }
     }
   }
   &.blue {
     background: $playful-blue;
     &:hover {
-      background: darken($playful-blue, 10%);
+      &::after {
+        width: 100%;
+        background: darken($playful-blue, 10%);
+      }
     }
   }
   &.yellow {
     background: $playful-yellow;
     &:hover {
-      background: darken($playful-yellow, 10%);
+      &::after {
+        width: 100%;
+        background: darken($playful-yellow, 10%);
+      }
     }
   }
   &.green {
     background: $playful-green;
     &:hover {
-      background: darken($playful-green, 10%);
+      &::after {
+        width: 100%;
+        background: darken($playful-green, 10%);
+      }
     }
   }
 }
