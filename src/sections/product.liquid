@@ -2,39 +2,34 @@
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
   <div class="container">
-    <div class="row flex-row flex-wrap">
+    <div class="row">
       <div class="col-12 col-sm-8">
-        {% for image in product.images %}
-          {% capture wrapper_class %}
-            {%- unless featured_image == image -%}
-              hide
-            {%- endunless -%}
-          {% endcapture %}
-
-          {% include 'responsive-image' with
-            image: image,
-            max_width: 700,
-            max_height: 800,
-            image_attributes: "data-product-featured-image",
-            wrapper_class: wrapper_class,
-            wrapper_attributes: "data-product-image-wrapper",
-          %}
-        {% endfor %}
-
-        {% if product.images.size > 1 %}
-          <ul>
-            {% for image in product.images %}
-              <li>
-                <a href="{{ image.src | img_url: '480x480' }}" data-thumbnail-id="{{ image.id }}" data-product-single-thumbnail>
-                  <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+        <div class="row flex-row flex-wrap flex-row-reverse">
+          <div class="col-12 col-sm-9 main-image--container">
+            <img
+              id="MainImage"
+              class="img-responsive main-img"
+              src=""
+              alt="{{ current_variant.featured_image }}">
+          </div>
+          <div class="col-12 col-sm-3 product-images">
+            {% if product.images.size > 1 %}
+              <ul id="ImageList" class="image-list">
+                {% for image in product.images %}
+                  <li class="image-item">
+                    <img
+                      class="product-single__thumbnail-image img-responsive"
+                      src="{{ image.src | img_url: '500x500' }}"
+                      alt="{{ image.alt | escape }}">
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
       </div> <!-- /.col-sm-8 -->
       <div class="col-12 col-sm-4">
-        <div class="product-details-container">
+        <div class="product-details-container customer-form">
           <h1 class="product--title">{{ product.title }}</h1>
           <h2 class="product--title">{{ current_variant.sku }}</h2>
           <p class="product--vendor">{{ product.vendor }}</p>
@@ -147,3 +142,24 @@
     ]
   }
 {% endschema %}
+<script>
+  let il = document.getElementById('ImageList'); // image list
+  let fi = document.querySelectorAll(".product-single__thumbnail-image"); // first image
+  let main = document.getElementById('MainImage'); // main image
+
+  main.src = fi[0].src; // set main image src to the first image in the list
+  fi[0].classList.add("active"); //set active class on first image
+
+  il.addEventListener("click", function(e) {
+    // just ot check if the target is an img
+    if (e.target.tagName == "IMG") {
+      // fi[0].classList.remove("active");
+      main.src = e.target.src;
+      for (var i = 0; i < fi.length; i++) {
+        fi[i].classList.remove("active");
+        e.target.classList.add("active");
+      }
+      e.stopPropagation();
+    }
+  });
+</script>
