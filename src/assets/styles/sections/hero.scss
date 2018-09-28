@@ -4,33 +4,33 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 
-  &.hero--x-small{
+  &.hero--x-small {
     min-height: calc(50vh - 223px);
     height: 100%;
   }
-  &.hero--small{
+  &.hero--small {
     min-height: calc(60vh - 223px);
     height: 100%;
   }
-  &.hero--medium{
+  &.hero--medium {
     min-height: calc(70vh - 223px);
     height: 100%;
   }
-  &.hero--large{
+  &.hero--large {
     min-height: calc(85vh - 223px);
     height: 100%;
   }
-  &.hero--x-large{
+  &.hero--x-large {
     min-height: calc(100vh - 223px);
     height: 100%;
   }
-  .mega-subtitle{
+  .mega-subtitle {
     display: block;
     max-width: 35em;
     margin: 0 auto;
@@ -40,27 +40,37 @@
   }
 }
 
-.hero-title{
+.hero-title {
   font-family: var(--font-heading) !important;
   font-size: 4em;
   text-transform: uppercase;
   font-weight: 800;
 }
 
-.hero-title__span{
-
-  &:nth-child(4n+1){color: $playful-red;}
-  &:nth-child(4n+2){color: $playful-blue;}
-  &:nth-child(4n+3){color: $playful-yellow;}
-  &:nth-child(4n+4){color: $playful-green;}
+.hero-title__span {
+  &:nth-child(4n + 1) {
+    color: $playful-red;
+  }
+  &:nth-child(4n + 2) {
+    color: $playful-blue;
+  }
+  &:nth-child(4n + 3) {
+    color: $playful-yellow;
+  }
+  &:nth-child(4n + 4) {
+    color: $playful-green;
+  }
 }
 
-.hero__btn{
+.hero__btn {
   display: inline-block;
+  width: unset;
   padding: 1em 5em;
   text-transform: uppercase;
   font-size: 1.2em;
   border-radius: 100px;
-  -webkit-box-shadow: 2px 2px 6px rgba(47, 47, 47, 0.18), 5px 7px 16px rgba(47, 47, 47, 0.42);
-          box-shadow: 2px 2px 6px rgba(47, 47, 47, 0.18), 5px 7px 16px rgba(47, 47, 47, 0.42);
+  -webkit-box-shadow: 2px 2px 6px rgba(47, 47, 47, 0.18),
+    5px 7px 16px rgba(47, 47, 47, 0.42);
+  box-shadow: 2px 2px 6px rgba(47, 47, 47, 0.18),
+    5px 7px 16px rgba(47, 47, 47, 0.42);
 }
