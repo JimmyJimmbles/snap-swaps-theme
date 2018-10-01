@@ -1,7 +1,7 @@
 <section data-section-id="{{ section.id }}" class="block-with-social">
   <div class="container container-fluid--md">
     <div class="row">
-      <div class="col-12 col-md-8 bg-white">
+      <div class="col-12 col-md-6 col-lg-8 bg-white">
         {% if section.settings.block_text != blank %}
           <div class="block--text">
             {{ section.settings.block_text }}
@@ -20,7 +20,7 @@
           </div>
         {% endif %}
       </div>
-      <div class="col-12 col-md-4 bg-yellow">
+      <div class="col-12 col-md-6 col-lg-4 bg-yellow">
         <div class="block-heading">
           <h1 class="block-heading--title">
             {{ section.settings.title | escape }}

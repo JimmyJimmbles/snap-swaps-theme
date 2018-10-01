@@ -37,15 +37,27 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1.5em;
+  @include media-query($small) {
+    margin: 1em 0 2em;
+    width: 100%;
+    flex-direction: column;
+  }
 
   .hero-info--social {
     position: relative;
     display: block;
+    @include media-query($small) {
+      margin: 1em 0 0;
+      width: 100%;
+    }
   }
   .hero-info--contact {
     position: relative;
     display: block;
     padding: 0 2em 0 0;
+    @include media-query($small) {
+      padding: unset;
+    }
   }
 }
 
@@ -53,6 +65,10 @@
   display: flex;
   flex-flow: column;
   align-items: flex-end;
+  @include media-query($small) {
+    width: 100%;
+    display: block;
+  }
 
   .search-input {
     position: relative;
@@ -61,12 +77,18 @@
     border-radius: 30px;
     padding: 0 1em;
     overflow: hidden;
+    @include media-query($small) {
+      width: 100%;
+    }
 
     [type="search"] {
       background: transparent;
       color: #fff;
       height: 37px;
       border: none;
+      @include media-query($small) {
+        width: 95%;
+      }
 
       &:focus,
       &:active {
@@ -92,6 +114,12 @@
 /*Navigation*/
 .navbar {
   padding: 0;
+  @include media-query($small) {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 1000;
+  }
 
   .navbar-list {
     display: flex;

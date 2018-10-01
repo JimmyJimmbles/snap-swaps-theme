@@ -8,21 +8,25 @@ picture {
   max-width: 100%;
 }
 
-iframe{
+iframe {
   width: 100%;
   display: block;
   max-width: 100%;
 }
-.social-list{
-	display: inline-flex;
-	margin: 0;
-	padding: 0;
-	list-style: none;
+.social-list {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @include media-query($small) {
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-  .social-list--item{
+  .social-list--item {
     display: block;
 
-    .social-list--link{
+    .social-list--link {
       position: relative;
       font-size: 1.4em;
       background: #333;
@@ -33,7 +37,7 @@ iframe{
       align-items: center;
       justify-content: center;
 
-      .fa{
+      .fa {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -43,38 +47,50 @@ iframe{
   }
 }
 .social-link--colorful {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 1.75em;
-	width: 1.75em;
-	margin: 0 0.25em;
-	border-radius: 100px;
-	color: #141415 !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75em;
+  width: 1.75em;
+  margin: 0 0.25em;
+  border-radius: 100px;
+  color: #141415 !important;
+  @include media-query($small) {
+    width: 2em;
+    height: 2em;
+    font-size: 1.3em;
+  }
 
-	&.twitter{
-		background: $playful-blue;
-		&:hover{ background: darken($playful-blue, 10%); }
-	}
-	&.snapchat{
-		background: $playful-yellow;
-		&:hover{ background: darken($playful-yellow, 10%); }
-	}
-	&.google-plus{
-		background: $playful-green;
-		&:hover{ background: darken($playful-green, 10%); }
-	}
-	&.facebook{
-		background: $playful-red;
-		&:hover{ background: darken($playful-red, 10%); }
-	}
-	// If browser dosen't support flex blox
-	.fa{
-		position: absolute;
+  &.twitter {
+    background: $playful-blue;
+    &:hover {
+      background: darken($playful-blue, 10%);
+    }
+  }
+  &.snapchat {
+    background: $playful-yellow;
+    &:hover {
+      background: darken($playful-yellow, 10%);
+    }
+  }
+  &.google-plus {
+    background: $playful-green;
+    &:hover {
+      background: darken($playful-green, 10%);
+    }
+  }
+  &.facebook {
+    background: $playful-red;
+    &:hover {
+      background: darken($playful-red, 10%);
+    }
+  }
+  // If browser dosen't support flex blox
+  .fa {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	}
-
+  }
 }

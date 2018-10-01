@@ -1,15 +1,15 @@
-.block-with-bullets{
+.block-with-bullets {
   position: relative;
   background: linear-gradient(to right, $playful-blue 38%, #ffffff 38%);
   z-index: 0;
 }
-.block-heading{
+.block-heading {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 2em;
 
-  .block-heading--title{
+  .block-heading--title {
     font-size: 3em;
     font-weight: 800;
     text-transform: uppercase;
@@ -17,7 +17,7 @@
     margin-bottom: 0;
   }
 }
-.block-bullets{
+.block-bullets {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -31,7 +31,7 @@
   padding: 1em 0;
   height: 100%;
 
-  .block-bullets--item{
+  .block-bullets--item {
     position: relative;
     counter-increment: section;
     display: -ms-flexbox;
@@ -44,50 +44,60 @@
     width: 27em;
     padding: 0 1.25em;
     margin: 1em 0;
+    @include media-query($medium) {
+      margin: 1em 0 4em;
+    }
 
-    .block-bullets__heading{
+    .block-bullets__heading {
       color: #2d2d2d;
       font-weight: 800;
       text-transform: uppercase;
       font-size: 1.5em;
       z-index: 1;
     }
-    .block-bullets__text{
+    .block-bullets__text {
       position: relative;
       text-align: start;
+      z-index: 1;
     }
-    &:nth-child(odd){
-      .block-bullets__text{
+    &:nth-child(odd) {
+      .block-bullets__text {
         text-align: end;
       }
     }
-    &:nth-child(odd){
+    &:nth-child(odd) {
       -ms-flex-flow: row-reverse;
       flex-flow: row-reverse wrap;
     }
-    &:nth-child(odd)::before{
+    &:nth-child(odd)::before {
       bottom: 6%;
-      left: 85%;
-      @media (min-width: 1024px) {
-        left: 100%;
+      left: 100%;
+      @include media-query($medium) {
+        left: 85%;
       }
+      @include media-query($medium-down) {
+        left: 75%;
+      }
+      // @media (min-width: 1024px) {
+      //   left: 100%;
+      // }
     }
-    &:nth-child(4n+1):before{
+    &:nth-child(4n + 1):before {
       background: $playful-yellow;
     }
-    &:nth-child(4n+2):before{
+    &:nth-child(4n + 2):before {
       background: $playful-green;
     }
-    &:nth-child(4n+3):before{
+    &:nth-child(4n + 3):before {
       background: $playful-red;
     }
-    &:nth-child(4n+4):before{
+    &:nth-child(4n + 4):before {
       background: $playful-blue;
     }
-    &:before{
+    &:before {
       position: absolute;
       bottom: 6%;
-      right: 85%;
+      right: 100%;
       content: "#" counter(section);
       display: -ms-flexbox;
       display: flex;
@@ -105,8 +115,8 @@
       font-weight: 800;
       transform: translate(0, -50%);
       z-index: 0;
-      @media (min-width: 1024px) {
-        right: 100%;
+      @include media-query($medium) {
+        right: 85%;
       }
     }
   }
