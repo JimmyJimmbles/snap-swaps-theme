@@ -47,6 +47,12 @@
       border: unset;
     }
   }
+  @include media-query($small) {
+    width: 100%;
+    [type="search"] {
+      width: 95%;
+    }
+  }
 
   .button {
     position: absolute;

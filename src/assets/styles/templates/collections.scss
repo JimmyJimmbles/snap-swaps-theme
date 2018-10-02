@@ -28,6 +28,10 @@
   max-height: 328px;
   overflow: hidden;
   border-radius: 4px;
+  @include media-query($small) {
+    max-width: unset;
+    max-height: unset;
+  }
   &::before {
     content: "";
     position: absolute;

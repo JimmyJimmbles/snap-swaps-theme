@@ -21,6 +21,7 @@ iframe {
   @include media-query($small) {
     display: flex;
     justify-content: space-evenly;
+    margin: 1em 0 2em;
   }
 
   .social-list--item {

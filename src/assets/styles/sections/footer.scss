@@ -24,6 +24,9 @@
 }
 .bottom-bar {
   border-top: 1px solid #404040;
+  @include media-query($small) {
+    margin-bottom: 3.5em;
+  }
 }
 .footer-list {
   padding: 0;
