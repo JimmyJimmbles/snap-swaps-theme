@@ -41,11 +41,14 @@
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: space-evenly;
-    width: 27em;
+    max-width: 27em;
     padding: 0 1.25em;
     margin: 1em 0;
     @include media-query($medium) {
       margin: 1em 0 4em;
+    }
+    @include media-query($small) {
+      margin: 3em 0;
     }
 
     .block-bullets__heading {
@@ -77,6 +80,9 @@
       }
       @include media-query($medium-down) {
         left: 75%;
+      }
+      @include media-query($small) {
+        left: 65%;
       }
       // @media (min-width: 1024px) {
       //   left: 100%;
@@ -117,6 +123,9 @@
       z-index: 0;
       @include media-query($medium) {
         right: 85%;
+      }
+      @include media-query($small) {
+        right: 65%;
       }
     }
   }

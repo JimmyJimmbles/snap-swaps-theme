@@ -10,6 +10,14 @@
   color: #fff;
   padding: 4em 0 0;
   margin-top: -1px;
+  @include media-query($small) {
+    padding: 2em 0 0;
+    .pr-4e {
+      &.pl-4e {
+        padding: 0 1em;
+      }
+    }
+  }
 }
 .warning-message {
   font-size: 13px;

@@ -37,6 +37,10 @@
         background-color: lighten($playful-blue, 10%);
       }
     }
+    @include media-query($small) {
+      padding: 0.2em 1rem;
+      margin: 0;
+    }
   }
 }
 .nav-pills .show > .nav-link {

@@ -11,24 +11,27 @@
   justify-content: center;
 
   &.hero--x-small {
-    min-height: calc(50vh - 223px);
+    min-height: calc(50vh - 226px);
     height: 100%;
   }
   &.hero--small {
-    min-height: calc(60vh - 223px);
+    min-height: calc(60vh - 226px);
     height: 100%;
   }
   &.hero--medium {
-    min-height: calc(70vh - 223px);
+    min-height: calc(70vh - 226px);
     height: 100%;
   }
   &.hero--large {
-    min-height: calc(85vh - 223px);
+    min-height: calc(85vh - 226px);
     height: 100%;
   }
   &.hero--x-large {
-    min-height: calc(100vh - 223px);
+    min-height: calc(100vh - 226px);
     height: 100%;
+  }
+  @include media-query($small) {
+    min-height: 80vh !important;
   }
   .mega-subtitle {
     display: block;
