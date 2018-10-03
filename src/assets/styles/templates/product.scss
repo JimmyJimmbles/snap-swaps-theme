@@ -118,12 +118,22 @@
     cursor: pointer;
     position: relative;
     margin-bottom: 0.5em;
+    background: #fff;
+  }
+  @include media-query($small) {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0;
+    .image-item {
+      margin: 0.25em;
+    }
   }
   .product-single__thumbnail-image {
     padding: 0.5em;
     border: 1px solid #ebedef;
     border-radius: 4px;
     transition: all 0.3s ease;
+    background: #fff;
     &:hover {
       transform: translateY(-3px);
       box-shadow: 4px 5px 16px 0 rgba(0, 0, 0, 0.15);
