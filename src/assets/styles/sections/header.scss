@@ -118,6 +118,9 @@
   }
   .account-icons {
     width: 30%;
+    @include media-query($medium-down) {
+      width: 70%;
+    }
     @include media-query($small) {
       width: 100%;
     }
