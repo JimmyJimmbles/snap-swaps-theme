@@ -78,3 +78,38 @@
     }
   }
 }
+.navbar-toggler {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: unset;
+}
+#mobileNavigation {
+  display: none;
+  @include media-query($small) {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10000;
+    height: 4em;
+  }
+  .mobile-nav--icon {
+    color: #fff;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.red {
+      background: $playful-red;
+    }
+    &.blue {
+      background: $playful-blue;
+    }
+    &.yellow {
+      background: $playful-yellow;
+    }
+    &.green {
+      background: $playful-green;
+    }
+  }
+}

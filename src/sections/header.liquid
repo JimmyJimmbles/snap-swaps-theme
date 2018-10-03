@@ -119,35 +119,65 @@
       </div>
     </div>
   </header>
-	<nav class="navbar" role="navigation">
-		<ul class="navbar-list">
-			{% for link in linklists[section.settings.menu].links %}
-				{% if link.links != blank %}
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="{{ link.url }}" aria-haspopup="true" aria-expanded="false">
-							{{ link.title }}
-							{% include 'icon-arrow-down' %}
-						</a>
-						<ul class="navbar-submenu dropdown-menu">
-							{% for childlink in link.links %}
-								<li>
-									<a class="dropdown-item" href="{{ childlink.url }}">
-										{{ childlink.title }}
-									</a>
-								</li>
-							{% endfor %}
-						</ul>
-					</li>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{{ link.url }}">
-							{{ link.title }}
-						</a>
-					</li>
-				{% endif %}
-			{% endfor %}
-		</ul>
+
+	<nav class="navbar navbar-expand-md primary-nav" role="navigation">
+		<div id="mainNavigation" class="collapse navbar-collapse">
+			<ul class="navbar-list">
+				{% for link in linklists[section.settings.menu].links %}
+					{% if link.links != blank %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="{{ link.url }}" aria-haspopup="true" aria-expanded="false">
+								{{ link.title }}
+								{% include 'icon-arrow-down' %}
+							</a>
+							<ul class="navbar-submenu dropdown-menu">
+								{% for childlink in link.links %}
+									<li>
+										<a class="dropdown-item" href="{{ childlink.url }}">
+											{{ childlink.title }}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ link.url }}">
+								{{ link.title }}
+							</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
 	</nav>
+	<div class="container-fluid">
+		<div id="mobileNavigation" class="row">
+			<a class="col mobile-nav--icon red" href="javascript:void()">
+				<i class="fas fa-home"></i>
+			</a>
+			<a class="col mobile-nav--icon blue" href="javascript:void()">
+				<i class="fas fa-phone"></i>
+			</a>
+			<a class="col mobile-nav--icon yellow" href="javascript:void()">
+				<i class="fas fa-map-marker-alt"></i>
+			</a>
+			<a class="col mobile-nav--icon green" href="javascript:void()">
+				<i class="far fa-thumbs-up"></i>
+			</a>
+			<button
+				id="toggleMenuBtn"
+				class="navbar-toggler toggle-main-menu col mobile-nav--icon red"
+				type="button"
+				data-toggle="collapse"
+				data-target="#mainNavigation"
+				aria-controls="mainNavigation"
+				aria-expanded="false"
+				aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+			</button>
+		</div>
+	</div>
 </section>
 
 {% if section.settings.logo != blank %}
