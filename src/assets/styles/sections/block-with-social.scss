@@ -1,26 +1,26 @@
-.block-with-social{
+.block-with-social {
   position: relative;
   background: linear-gradient(to right, #ffffff 60%, $playful-yellow 60%);
   z-index: 0;
 
-  .bg-yellow{
+  .bg-yellow {
     padding: 3em 1.5em;
   }
-  .social-list{
+  .social-list {
     padding: 0 1.5em;
     margin-bottom: 2em;
-    .social-list--item{
-      margin: 0 .5em;
-      .social-list--link{
+    .social-list--item {
+      margin: 0 0.5em;
+      .social-list--link {
         color: $playful-yellow;
       }
     }
   }
 }
-.block--image{
+.block--image {
   display: block;
   position: relative;
-  .responsive-image__wrapper{
+  .responsive-image__wrapper {
     position: absolute;
     display: block;
     max-width: 88% !important;
@@ -29,11 +29,17 @@
     height: auto;
     transform: translate(0, -17%);
     z-index: 1;
-    img{
+    @include media-query($small) {
+      position: relative;
+      padding-bottom: 2em;
+      max-width: 100% !important;
+      right: 8%;
+    }
+    img {
       max-height: unset !important;
     }
   }
-  .message-img{
+  .message-img {
     position: relative;
     width: 14em;
     height: 9em;
@@ -41,12 +47,18 @@
     top: 20em;
     left: 0%;
     z-index: 0;
+    @include media-query($small) {
+      position: absolute;
+      top: unset;
+      bottom: 0;
+      left: 17%;
+    }
   }
 }
-.social-block--content{
+.social-block--content {
   margin-top: 1em;
   margin-bottom: 3em;
-  .social-info{
+  .social-info {
     padding: 0 2.5em;
     width: 100%;
     word-wrap: break-word;

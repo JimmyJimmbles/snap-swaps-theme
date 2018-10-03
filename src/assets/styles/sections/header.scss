@@ -36,13 +36,11 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1.5em;
   @include media-query($small) {
     margin: 1em 0 0;
     width: 100%;
     flex-direction: column;
   }
-
   .hero-info--social {
     position: relative;
     display: block;
@@ -60,16 +58,19 @@
     }
   }
 }
-
-.hero-account {
+.hero-search {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-flow: column;
   flex-flow: column;
+  -ms-flex-align: end;
   align-items: flex-end;
-  @include media-query($small) {
-    width: 100%;
-    display: block;
+  margin: 1em 0;
+  .search-form {
+    @include media-query($small) {
+      width: 100%;
+    }
   }
-
   .search-input {
     position: relative;
     display: inline-block;
@@ -106,6 +107,29 @@
       right: 0.45em;
     }
   }
+}
+.hero-account {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  @include media-query($small) {
+    width: 100%;
+    display: block;
+  }
+  .account-icons {
+    width: 30%;
+    @include media-query($small) {
+      width: 100%;
+    }
+    .inline-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+}
+.shopping-cart--icon {
+  font-size: 1.2em;
 }
 .break {
   margin: 0 0.35em;

@@ -57,8 +57,8 @@
               </ul>
             </div>
           </div>
-          <div class="hero-account">
-            <form class="search-form" action="/search" method="get" role="search">
+					<div class="hero-search">
+						<form class="search-form" action="/search" method="get" role="search">
               <div class="search-input">
                 <input type="search"
                   name="q"
@@ -70,6 +70,8 @@
                 </button>
               </div>
             </form>
+					</div>
+					<div class="hero-account">
             <div class="account-icons">
               {% if shop.customer_accounts_enabled %}
                 <ul class="inline-list">
@@ -95,10 +97,18 @@
                     </li>
                   {% else %}
                     <li>
-                      {{ 'layout.customer.log_in' | t | customer_login_link }}
+											<a class="pill-btn login-btn blue" href="/account/login">
+												<span>
+													{{ 'layout.customer.log_in' | t }}
+												</span>
+											</a>
                     </li>
                     <li>
-                      {{ 'layout.customer.create_account' | t | customer_register_link }}
+											<a class="simple-link" href="/account/register">
+												<span>
+													{{ 'layout.customer.create_account' | t }}
+												</span>
+											</a>
                     </li>
                   {% endif %}
                 </ul>
