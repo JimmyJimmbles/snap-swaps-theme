@@ -7,12 +7,19 @@
   margin: 0 auto;
   @include media-query($small) {
     padding: 0.5em 0em 2em;
+    width: 100%;
   }
   &.sm-form {
     max-width: 50%;
+    @include media-query($small) {
+      max-width: 100%;
+    }
   }
   &.lg-form {
     max-width: 75%;
+    @include media-query($small) {
+      max-width: 100%;
+    }
   }
   &.recover {
     .customer-form--btn,
