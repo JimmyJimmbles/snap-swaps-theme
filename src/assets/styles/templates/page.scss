@@ -73,6 +73,10 @@
     z-index: 1;
     text-align: center;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    @include media-query($small) {
+      max-width: 95%;
+      margin-top: 1em
+    }
   }
 }
 
