@@ -1,3 +1,36 @@
-<div class="pagination">
+<!-- <div class="pagination">
+  {% if paginate.previous  %}
+    <a class="pill-btn yellow" href="{{ paginate.previous.url }}" rel="prev"><span>{{ paginate.previous.title }}</span></a>
+  {% endif %}
   {{ paginate | default_pagination }}
+  {% if paginate.next %}
+    <a class="pill-btn green" href="{{ paginate.next.url }}" rel="next"><span>{{ paginate.next.title }}</span></a>
+  {% endif %}
+</div> -->
+<div class="pagination">
+  {% if paginate.previous.is_link %}
+    <div class="prev">
+      <a href="{{ paginate.previous.url }}" class="pagination-item pagination-previous pill-btn yellow">
+        <span>Previous</span>
+      </a>
+    </div>
+  {% endif %}
+  {% for part in paginate.parts %}
+    {% if part.is_link %}
+      <span class="page">
+        <a href="{{part.url}}" class="pagination-item">{{ part.title }}</a>
+      </span>
+    {% elsif current_page %}
+    <span class="page current">
+      {{ current_page }}
+    </span>
+    {% endif %}
+  {% endfor %}
+  {% if paginate.next.is_link %}
+    <div class="next">
+      <a href="{{ paginate.next.url }}" class="pagination-item pagination-next pill-btn green">
+        <span>Next</span>
+      </a>
+    </div>
+  {% endif %}
 </div>
