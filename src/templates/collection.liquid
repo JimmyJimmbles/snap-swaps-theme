@@ -29,10 +29,12 @@
                   href="{{ product.url | within: collection }}"
                   role="link">
                   {% if product.featured_image != blank %}
-                    <img
-                      class="product-image--img img-responsive"
-                      src="{{ product_image }}"
-                      alt="{{ product.title }}">
+                    <div class="product-image">
+                      <img
+                        class="product-image--img img-responsive"
+                        src="{{ product_image }}"
+                        alt="{{ product.title }}">
+                    </div>
                   {% endif %}
                     <div class="colletion-details">
                       <div class="collection-details--name">
@@ -46,8 +48,10 @@
                             {%- assign sale_price = product.price | money -%}
                             {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
                           {% else %}
-                            {{ 'products.product.on_sale' | t }}
-                            {{ product.price | money }}
+                            <span class="on-sale">
+                              {{ 'products.product.on_sale' | t }}
+                              {{ product.price | money }}
+                            </span>
                           {% endif %}
 
                         {% else %}
@@ -66,14 +70,15 @@
                         {% endif %}
 
                         {% if product.compare_at_price > product.price %}
-                          <span class="visually-hidden">
-                            {{ 'products.product.regular_price' | t }}
+                          <span class="compared-price sale" data-compare-price>
+                            {{ product.compare_at_price | money }}
                           </span>
-                          <s>{{ product.compare_at_price | money }}</s>
                         {% endif %}
 
                         {% unless product.available %}
-                          {{ 'products.product.sold_out' | t }}
+                          <div class="sold-out">
+                            {{ 'products.product.sold_out' | t }}
+                          </div>
                         {% endunless %}
                       </div>
                     </div>
@@ -99,24 +104,26 @@
           {% capture product_image %} {{ product | img_url: '500x500' }} {% endcapture %}
           <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
             <div class="product-item">
-                <a
-                  class="product-image--link"
-                  title="View Product {{ product.title }}"
-                  href="{{ product.url | within: collection }}"
-                  role="link">
-                  {% if product.featured_image != blank %}
+              <a
+                class="product-image--link"
+                title="View Product {{ product.title }}"
+                href="{{ product.url | within: collection }}"
+                role="link">
+                {% if product.featured_image != blank %}
+                  <div class="product-image">
                     <img
                       class="product-image--img img-responsive"
                       src="{{ product_image }}"
                       alt="{{ product.title }}">
-                  {% endif %}
-                    <div class="colletion-details">
-                      <div class="collection-details--name">
-                        <span class="collection--title">{{ product.title }}</span>
-                        <span class="sku text-muted">{{ current_variant.sku }}</span>
-                      </div>
+                  </div>
+                {% endif %}
+                  <div class="colletion-details">
+                    <div class="collection-details--name">
+                      <span class="collection--title">{{ product.title }}</span>
+                      <span class="sku text-muted">{{ current_variant.sku }}</span>
                     </div>
-                </a>
+                  </div>
+              </a>
             </div>
           </div>
         {% endif %}

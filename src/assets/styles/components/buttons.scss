@@ -27,6 +27,13 @@
     display: block;
     z-index: 1;
   }
+  &.disabled {
+    background: #057098 !important;
+    cursor: no-drop;
+    &::after {
+      content: unset;
+    }
+  }
   &::after {
     content: "";
     position: absolute;

@@ -6,11 +6,13 @@
       <div class="col-12 col-sm-8">
         <div class="row flex-row flex-wrap flex-row-reverse">
           <div class="col-12 col-sm-9 main-image--container">
-            <img
-              id="MainImage"
-              class="img-responsive main-img"
-              src=""
-              alt="{{ current_variant.featured_image }}">
+            <div class="main-image">
+              <img
+                id="MainImage"
+                class="img-responsive"
+                src=""
+                alt="{{ current_variant.featured_image }}">
+            </div>
           </div>
           <div class="col-12 col-sm-3 product-images">
             {% if product.images.size > 1 %}
@@ -38,6 +40,13 @@
               {{ current_variant.price | money }}
             </span>
             <span class="text-muted">a pack</span>
+            {% if product.compare_at_price_max > product.price %}
+              <span class="compared-price sale" data-compare-price>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  {{ current_variant.compare_at_price | money }}
+                {% endif %}
+              </span>
+            {% endif %}
           </div>
           <div class="product--description">
             {{ product.description }}
@@ -78,17 +87,6 @@
               {% endfor %}
             </select>
 
-            <div data-price-wrapper>
-              {% if product.compare_at_price_max > product.price %}
-                <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-                <s data-compare-price>
-                  {% if current_variant.compare_at_price > current_variant.price %}
-                    {{ current_variant.compare_at_price | money }}
-                  {% endif %}
-                </s>
-              {% endif %}
-            </div>
-
             <div class="form-group">
               <label class="product-input--label" for="Quantity">{{ 'products.product.quantity' | t }}</label>
               <input
@@ -101,6 +99,7 @@
             </div>
 
             <div class="form--btn">
+              {% if current_variant.available %}
               <button
                 class="pill-btn blue p-4"
                 type="submit"
@@ -108,13 +107,21 @@
                 data-add-to-cart
                 {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                   <span data-add-to-cart-text>
-                    {% if current_variant.available %}
-                      {{ 'products.product.add_to_cart' | t }}
-                    {% else %}
-                      {{ 'products.product.sold_out' | t }}
-                    {% endif %}
+                    {{ 'products.product.add_to_cart' | t }}
                   </span>
               </button>
+              {% else %}
+              <button
+                class="pill-btn blue p-4 disabled"
+                type="submit"
+                name="add"
+                data-add-to-cart
+                disabled="disabled">
+                  <span data-add-to-cart-text>
+                    {{ 'products.product.sold_out' | t }}
+                  </span>
+              </button>
+              {% endif %}
             </div>
           </form> <!-- /.form -->
         </div>
