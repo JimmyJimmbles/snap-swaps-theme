@@ -152,8 +152,10 @@
     display: flex;
     flex-direction: row;
     margin: 1em 0;
+    overflow: scroll;
     .image-item {
       margin: 0.25em;
+      flex: 0 0 35%;
     }
   }
   .product-single__thumbnail-image {
