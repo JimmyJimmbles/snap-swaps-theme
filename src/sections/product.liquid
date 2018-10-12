@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-12 col-sm-8">
         <div class="row flex-row flex-wrap flex-row-reverse">
-          <div class="col-12 col-sm-9 main-image--container">
+          <div class="col-12 main-image--container">
             <div class="main-image">
               <img
                 id="MainImage"
@@ -14,7 +14,7 @@
                 alt="{{ current_variant.featured_image }}">
             </div>
           </div>
-          <div class="col-12 col-sm-3 product-images">
+          <div class="col-12 product-images">
             {% if product.images.size > 1 %}
               <ul id="ImageList" class="image-list">
                 {% for image in product.images %}
@@ -25,6 +25,14 @@
                       alt="{{ image.alt | escape }}">
                   </li>
                 {% endfor %}
+                <span class="control prev" role="button" data-slide="prev">
+                  <i class="fas fa-arrow-left"></i>
+                  <span class="sr-only">Previous</span>
+                </span>
+                <span class="control next" role="button" data-slide="next">
+                  <i class="fas fa-arrow-right"></i>
+                  <span class="sr-only">Next</span>
+                </span>
               </ul>
             {% endif %}
           </div>
@@ -150,12 +158,15 @@
   }
 {% endschema %}
 <script>
+  /**
+   * Setting the main image src and adding active classes when image is selected
+  **/
   let il = document.getElementById('ImageList'); // image list
   let fi = document.querySelectorAll(".product-single__thumbnail-image"); // first image
   let main = document.getElementById('MainImage'); // main image
 
   main.src = fi[0].src; // set main image src to the first image in the list
-  fi[0].classList.add("active"); //set active class on first image
+  fi[0].parentElement.classList.add("active"); //set active class on first image
 
   il.addEventListener("click", function(e) {
     // just ot check if the target is an img
@@ -163,10 +174,56 @@
       // fi[0].classList.remove("active");
       main.src = e.target.src;
       for (var i = 0; i < fi.length; i++) {
-        fi[i].classList.remove("active");
-        e.target.classList.add("active");
+        fi[i].parentElement.classList.remove("active");
+        e.target.parentElement.classList.add("active");
       }
       e.stopPropagation();
     }
   });
+
+  /**
+   * Scroll through list of images
+  **/
+  let imgArr = document.querySelectorAll(".image-item");
+  let arrLength = imgArr.length;
+  let controls = document.querySelectorAll(".control");
+  let width = 0;
+  if (arrLength < 4) {
+    controls.style.display = none;
+  } else {
+    for (var i = 0; i < controls.length; i++) {
+      let dir = controls[i].dataset.slide;
+      if (dir == "next") {
+        controls[i].addEventListener("click", next, false);
+      } else if (dir == "prev") {
+        controls[i].addEventListener("click", prev, false);
+      }
+    }
+  }
+  function next() {
+    let item = document.querySelector(".image-item");
+    let margin = item.offsetWidth * 2;
+    let ml = parseInt(item.style.marginLeft);
+    for (var i = 0; i < imgArr.length; i++) {
+      var n = (imgArr[i].offsetWidth * i) - (imgArr[i].offsetWidth * 2);
+    }
+    if (width == 0) {
+      width = margin;
+      item.style.marginLeft = -width + "px";
+    } else if (ml-margin <= -n) {
+      item.style.marginLeft = -n + "px";
+    } else {
+      let ml = parseInt(item.style.marginLeft);
+      item.style.marginLeft = (ml-margin) + "px";
+    }
+  }
+  function prev() {
+    let item = document.querySelector(".image-item");
+    let margin = item.offsetWidth * 2;
+    let ml = parseInt(item.style.marginLeft);
+    item.style.marginLeft = (ml+margin) + "px";
+    if (ml+margin >= 0) {
+      item.style.marginLeft = 0;
+    }
+  }
 </script>
