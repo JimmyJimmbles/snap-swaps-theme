@@ -20,10 +20,14 @@
       <span class="page">
         <a href="{{part.url}}" class="pagination-item">{{ part.title }}</a>
       </span>
-    {% elsif current_page %}
-    <span class="page current">
-      {{ current_page }}
-    </span>
+    {% else %}
+      {% if part.title ==  paginate.current_page%}
+        <span class="page current">
+          {{ paginate.current_page }}
+        </span>
+      {% else %}
+        <span>{{ part.title }}</span>
+      {% endif %}
     {% endif %}
   {% endfor %}
   {% if paginate.next.is_link %}
