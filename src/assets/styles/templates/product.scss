@@ -125,14 +125,13 @@
  * Image List
  **/
 .main-image--container {
-  max-height: 560px;
   .main-image {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
-    padding: 0 2em;
+    padding: 2em 0;
     box-shadow: 0px 17px 7px -12px rgba(52, 59, 68, 0.2),
       0px 1px 6px rgba(0, 0, 0, 0.24);
     border-radius: 5px;
@@ -152,6 +151,12 @@
   width: 100%;
   padding: 0;
   list-style: none;
+  &:hover {
+    .control {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+  }
   .image-item {
     cursor: pointer;
     position: relative;
@@ -200,14 +205,18 @@
   cursor: pointer;
   box-shadow: 0px 17px 7px -12px rgba(52, 59, 68, 0.2),
     0px 1px 6px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s ease;
+  opacity: 0;
   &:hover {
     color: #00a551;
     text-decoration: none;
   }
   &.next {
     right: 2px;
+    transform: translate(0.5em, -50%);
   }
   &.prev {
     left: 2px;
+    transform: translate(-0.5em, -50%);
   }
 }

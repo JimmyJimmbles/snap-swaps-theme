@@ -29,63 +29,109 @@
           </div>
         </form>
       </div>
-      <!-- <form action="/search" method="get" role="search">
-        <label for="Search" class="label-hidden">
-          {{ 'general.search.placeholder' | t }}
-        </label>
-        <input type="search"
-               name="q"
-               id="Search"
-               value="{{ search.terms | escape }}"
-               placeholder="{{ 'general.search.placeholder' | t }}">
-        <button type="submit" class="button">
-          {% include 'icon-search' %}
-          <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-        </button>
-      </form> -->
       {% if search.performed %}
         {% if search.results_count == 0 %}
           <p>{{ 'general.search.no_results_html' | t: terms: search.terms }}</p>
         {% else %}
           <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
-          <ul>
+          <ul class="row list-row">
             {% for item in search.results %}
-              <li>
-                <a href="{{ item.url | within: collection }}">
-                  {% assign featured_image = item.image | default: item.featured_image %}
-                  {% if featured_image != blank %}
-                    {{ featured_image | img_url: '240x240' | img_tag }}
-                  {% endif %}
-                  <h3>{{ item.title }}</h3>
-                </a>
-                {% if item.object_type == 'product' %}
-                  <p>
-                    {% if item.compare_at_price > item.price %}
-                      {% if item.price_varies %}
-                        {% assign sale_price = item.price | money %}
-                        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                      {% else %}
-                        {{ 'products.product.on_sale' | t }}
-                        <span>{{ item.price | money }}</span>
-                      {% endif %}
-                      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                      <s>{{ item.compare_at_price | money }}</s>
-                    {% else %}
-                      {% if item.price_varies %}
-                        {% assign price = item.price | money %}
-                        <span>{{ 'products.product.from_text_html' | t: price: price }}</span>
-                      {% else %}
-                        <span>{{ item.price | money }}</span>
-                      {% endif %}
-                    {% endif %}
-                    {% unless item.available %}
-                    {{ 'products.product.sold_out' | t }}
-                    {% endunless %}
-                  </p>
-                {% else %}
-                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-                {% endif %}
+              {%- assign current_variant = item.selected_or_first_available_variant -%}
+              {% assign featured_image = item.image | default: item.featured_image %}
+              {% capture product_image %} {{ item | img_url: '500x500' }} {% endcapture %}
 
+              <li class="list-item col-12 col-sm-6 col-md-4 mb-5">
+              {% if item.object_type == 'product' %}
+                <div class="product-item">
+                  <a
+                    class="product-image--link"
+                    title="View Product {{ item.title }}"
+                    href="{{ item.url | within: collection }}"
+                    role="link">
+                    {% if featured_image != blank %}
+                      <div class="product-image">
+                        <img
+                          class="product-image--img img-responsive"
+                          src="{{ product_image }}"
+                          alt="{{ item.title }}">
+                      </div>
+                    {% endif %}
+                    <div class="colletion-details">
+                      <div class="collection-details--name">
+                        <span class="collection--title">{{ item.title }}</span>
+                        <span class="sku text-muted">{{ current_variant.sku }}</span>
+                      </div>
+                      {% if item.template_suffix != 'nobuy' %}
+                      <div class="collection-details--price">
+                        {% if item.compare_at_price > item.price %}
+
+                          {% if item.price_varies %}
+                            {%- assign sale_price = item.price | money -%}
+                            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                          {% else %}
+                            <span class="on-sale">
+                              {{ 'products.product.on_sale' | t }}
+                              {{ item.price | money }}
+                            </span>
+                          {% endif %}
+
+                        {% else %}
+
+                          {% if item.price_varies %}
+                            {%- assign price = item.price | money -%}
+                            <span class="collection--price" data-product-price>
+                              {{ 'products.product.from_text_html' | t: price: price }}
+                            </span>
+                          {% else %}
+                            <span class="collection--price" data-product-price>
+                              {{ item.price | money }}
+                            </span>
+                          {% endif %}
+
+                        {% endif %}
+
+                        {% if item.compare_at_price > item.price %}
+                          <span class="compared-price sale" data-compare-price>
+                            {{ item.compare_at_price | money }}
+                          </span>
+                        {% endif %}
+
+                        {% unless item.available %}
+                          <div class="sold-out">
+                            {{ 'products.product.sold_out' | t }}
+                          </div>
+                        {% endunless %}
+                      </div>
+                      {% endif %}
+                    </div>
+                  </a>
+                </div>
+                <!-- <p>
+                  {% if item.compare_at_price > item.price %}
+                    {% if item.price_varies %}
+                      {% assign sale_price = item.price | money %}
+                      {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                    {% else %}
+                      {{ 'products.product.on_sale' | t }}
+                      <span>{{ item.price | money }}</span>
+                    {% endif %}
+                    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                    <s>{{ item.compare_at_price | money }}</s>
+                  {% else %}
+                    {% if item.price_varies %}
+                      {% assign price = item.price | money %}
+                      <span>{{ 'products.product.from_text_html' | t: price: price }}</span>
+                    {% else %}
+                      <span>{{ item.price | money }}</span>
+                    {% endif %}
+                  {% endif %}
+                  {% unless item.available %}
+                  {{ 'products.product.sold_out' | t }}
+                  {% endunless %}
+                </p> -->
+              {% else %}
+                <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+              {% endif %}
               </li>
             {% endfor %}
           </ul>

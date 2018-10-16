@@ -88,24 +88,7 @@
                               </div>
                           </a>
                       </div>
-                    {% comment %}
-                    <div class="product-box">
-                      <a class="product-image--link" href="{{ product.url }}" role="link">
-                        <img
-                          class="product-image--img"
-                          src="{{ product_image }}"
-                          alt="{{ product.title }}">
-                      </a>
-                      <div class="product-details">
-                        <h3 class="product-title"> {{ product.title }} </h3>
-                        <span class="product-title--sub"> ({{ current_variant.sku }}) </span>
-                        <div class="product-description">
-                          {{ product.description }}
-                        </div>
-                      </div>
                     </div>
-                    {% endcomment %}
-                  </div>
                   {% if mod == 0 %}
                     {%- unless forloop.last -%}
                     </div>
