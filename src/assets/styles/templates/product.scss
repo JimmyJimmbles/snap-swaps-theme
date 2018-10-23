@@ -220,3 +220,11 @@
     transform: translate(-0.5em, -50%);
   }
 }
+.carousel {
+  &:hover {
+    .control {
+      opacity: 1;
+      transform: translateY(-50%);
+    }
+  }
+}
