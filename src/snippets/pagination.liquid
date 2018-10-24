@@ -1,12 +1,3 @@
-<!-- <div class="pagination">
-  {% if paginate.previous  %}
-    <a class="pill-btn yellow" href="{{ paginate.previous.url }}" rel="prev"><span>{{ paginate.previous.title }}</span></a>
-  {% endif %}
-  {{ paginate | default_pagination }}
-  {% if paginate.next %}
-    <a class="pill-btn green" href="{{ paginate.next.url }}" rel="next"><span>{{ paginate.next.title }}</span></a>
-  {% endif %}
-</div> -->
 <div class="pagination">
   {% if paginate.previous.is_link %}
     <div class="prev">
